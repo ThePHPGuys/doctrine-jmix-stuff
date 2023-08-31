@@ -6,12 +6,29 @@ namespace Misterx\DoctrineJmix;
 use Misterx\DoctrineJmix\Data\View;
 use Misterx\DoctrineJmix\Data\ViewProperty;
 use Misterx\DoctrineJmix\MetaModel\MetaClass;
+use Misterx\DoctrineJmix\MetaModel\MetaData;
 
 readonly class DefaultViewsRepository implements ViewsRepository
 {
-    public function __construct(private MetaDataTools $metaDataTools)
+    public function __construct(private MetaData $metaData, private ViewBuilderFactory $viewBuilderFactory)
     {
+
     }
+
+    public function getEntityView(string $entityClass, string $name): View
+    {
+        return $this->getMetaClassView($this->metaData->getByClass($entityClass), $name);
+    }
+
+    public function getMetaClassView(MetaClass $metaClass, string $name): View
+    {
+        $view = $this->findMetaClassView($metaClass, $name);
+        if (!$view) {
+            throw new \RuntimeException(sprintf('Unable to find view "%s" for entity "%s', $name, $metaClass->getName()));
+        }
+        return $view;
+    }
+
 
     public function findMetaClassView(MetaClass $metaClass, string $name): ?View
     {
@@ -22,9 +39,9 @@ readonly class DefaultViewsRepository implements ViewsRepository
             case View::LOCAL:
                 return $this->createLocalView($metaClass);
             case View::INSTANCE_NAME:
-                throw new \LogicException('Unimplemented');
+                return $this->createLocalView($metaClass);
             case View::BASE:
-                throw new \LogicException('Unimplemented');
+                return $this->createLocalView($metaClass);
             default:
                 return null;
         }
@@ -38,36 +55,17 @@ readonly class DefaultViewsRepository implements ViewsRepository
 
     private function createLocalView(MetaClass $metaClass): View
     {
-        $properties = [];
+        $builder = $this->viewBuilderFactory->create($metaClass->getClassName());
+        $builder->addSystem();
         foreach ($metaClass->getProperties() as $metaProperty) {
             if (!$metaProperty->getRange()->isClass()) {
-                $properties[$metaProperty->getName()] = new ViewProperty($metaProperty->getName());
+                $builder->addProperty($metaProperty->getName());
             }
         }
-        $properties = $this->addSystemProperties($metaClass, $properties);
-        return new View(properties: $properties);
+
+        return $builder->build();
     }
 
-    /**
-     * @param array<string,ViewProperty> $properties
-     * @return array<string,ViewProperty>
-     */
-    private function addSystemProperties(MetaClass $metaClass, array $properties): array
-    {
-        $systemPropertiesNames = $this->metaDataTools->getSystemPropertyNames($metaClass);
-        foreach ($systemPropertiesNames as $property) {
-            if (array_key_exists($property, $properties)) {
-                continue;
-            }
-            if ($metaClass->getProperty($property)->getRange()->isClass()) {
-                //TODO: Default should be View::INSTANCE_NAME for related properties
-                $properties[$property] = new ViewProperty($property, new View(View::BASE));
-            } else {
-                $properties[$property] = new ViewProperty($property);
-            }
-        }
-        return $properties;
-    }
 
     private function getInstanceNameView(View $view, MetaClass $metaClass): View
     {

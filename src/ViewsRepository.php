@@ -9,4 +9,8 @@ use Misterx\DoctrineJmix\MetaModel\MetaClass;
 interface ViewsRepository
 {
     public function findMetaClassView(MetaClass $metaClass, string $name): ?View;
+
+    public function getEntityView(string $entityClass, string $name): View;
+
+    public function getMetaClassView(MetaClass $metaClass, string $name): View;
 }

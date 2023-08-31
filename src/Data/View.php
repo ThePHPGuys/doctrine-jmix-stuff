@@ -12,7 +12,7 @@ final class View
     /** @var string Includes only properties contained in InstanceName */
     public const INSTANCE_NAME = '_instance_name';
     /**
-     * @var ViewProperty[]
+     * @var array<string,ViewProperty>
      */
     private array $properties = [];
 
@@ -28,7 +28,7 @@ final class View
     }
 
     /**
-     * @return ViewProperty[]
+     * @return array<string,ViewProperty>
      */
     public function getProperties(): array
     {
