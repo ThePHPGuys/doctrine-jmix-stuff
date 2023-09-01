@@ -41,7 +41,22 @@ final class LogicalCondition implements Condition, \Stringable
 
     public function actualize(array $actualParameters): ?Condition
     {
-        // TODO: Implement actualize() method.
+        $copy = new self($this->type);
+        foreach ($this->conditions as $condition) {
+            $actualized = $condition->actualize($actualParameters);
+            if (!$actualized) {
+                continue;
+            }
+            $copy->add($actualized);
+        }
+        if (!$copy->conditions) {
+            return null;
+        }
+        if (count($copy->conditions) === 1) {
+            return $copy->conditions[0];
+        }
+
+        return $copy;
     }
 
     public function getType(): Type

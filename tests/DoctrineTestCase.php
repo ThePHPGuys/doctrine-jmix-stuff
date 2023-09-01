@@ -7,11 +7,13 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
+use Misterx\DoctrineJmix\DefaultViewsRepository;
 use Misterx\DoctrineJmix\Doctrine\AliasGenerator;
 use Misterx\DoctrineJmix\Doctrine\Condition\ConditionGeneratorResolver;
 use Misterx\DoctrineJmix\Doctrine\Condition\LogicalConditionGenerator;
 use Misterx\DoctrineJmix\Doctrine\Condition\PropertyConditionGenerator;
 use Misterx\DoctrineJmix\Doctrine\DoctrineMetaDataLoader;
+use Misterx\DoctrineJmix\MetaDataTools;
 use Misterx\DoctrineJmix\MetaModel\MetaData;
 use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Action;
 use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Address;
@@ -20,6 +22,7 @@ use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Order;
 use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\OrderLine;
 use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Product;
 use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Tag;
+use Misterx\DoctrineJmix\ViewBuilderFactory;
 use PHPUnit\Framework\TestCase;
 
 abstract class DoctrineTestCase extends TestCase
@@ -79,4 +82,12 @@ abstract class DoctrineTestCase extends TestCase
         return $resolver;
     }
 
+
+    protected function getViewBuilderFactory(MetaData $metaData): ViewBuilderFactory
+    {
+        $viewBuilderFactory = new ViewBuilderFactory($metaData, new MetaDataTools());
+        $viewsRepository = new DefaultViewsRepository($metaData, $viewBuilderFactory);
+        $viewBuilderFactory->setRepository($viewsRepository);
+        return $viewBuilderFactory;
+    }
 }

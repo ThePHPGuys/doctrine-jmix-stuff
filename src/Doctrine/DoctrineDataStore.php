@@ -52,6 +52,11 @@ final class DoctrineDataStore extends DataStore\AbstractDataStore
                 ->setQueryString($contextQuery->getQueryString())
                 ->setCondition($contextQuery->getCondition())
                 ->setQueryParameters($contextQuery->getParameters());
+
+            if ($contextQuery instanceof DoctrineContextQuery) {
+                $assembler->setQueryBuilder($contextQuery->getQueryBuilder());
+            }
+
             if (!$countQuery) {
                 $assembler->setSort($contextQuery->getSort());
             } else {
@@ -59,7 +64,18 @@ final class DoctrineDataStore extends DataStore\AbstractDataStore
             }
         }
         $query = $assembler->assembleQuery($entityManager);
-
+        if ($contextQuery) {
+            if ($contextQuery->getOffset() !== null) {
+                $query->setFirstResult($contextQuery->getOffset());
+            }
+            if ($contextQuery->getLimit() !== null) {
+                $query->setMaxResults($contextQuery->getLimit());
+            }
+        }
+        dump('---------------DQL---------------');
+        dump($query->getDQL());
+        dump('---------------SQL---------------');
+        dd($query->getSQL());
     }
 
 

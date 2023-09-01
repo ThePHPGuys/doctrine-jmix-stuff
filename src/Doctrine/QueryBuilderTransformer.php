@@ -20,7 +20,23 @@ final class QueryBuilderTransformer implements QueryTransformer
 
     public function addJoin(string $join, string $alias): void
     {
+        if (in_array($alias, $this->getJoinAliases())) {
+            return;
+        }
         $this->queryBuilder->join($this->replaceEntityPlaceholder($join, $this->getRootAlias()), $alias);
+
+    }
+
+    private function getJoinAliases(): array
+    {
+        $joins = $this->queryBuilder->getDQLPart('join');
+        if (!$joins) {
+            return [];
+        }
+        if (!array_key_exists($this->getRootAlias(), $joins)) {
+            return [];
+        }
+        return array_map(fn(Query\Expr\Join $join) => $join->getAlias(), $joins[$this->getRootAlias()]);
     }
 
     public function addWhere(string $where): void
@@ -30,7 +46,8 @@ final class QueryBuilderTransformer implements QueryTransformer
 
     public function replaceWithCount(): void
     {
-
+        $this->queryBuilder->select(sprintf('COUNT(%s)', $this->getRootAlias()));
+        $this->queryBuilder->resetDQLParts('orderBy');
     }
 
     public function getQuery(): Query
@@ -46,9 +63,15 @@ final class QueryBuilderTransformer implements QueryTransformer
     {
         $orderByExpression = new Query\Expr\OrderBy();
         foreach ($sortExpressions as $sort => $order) {
-            $orderByExpression->add($sort, $order->value);
+            $orderByExpression->add($this->replaceEntityPlaceholder($sort, $this->getRootAlias()), $order->value);
         }
         $this->queryBuilder->orderBy($orderByExpression);
+    }
+
+    public function replaceSelect(array $select): void
+    {
+        $selectList = array_map(fn(string $select) => $this->replaceEntityPlaceholder($select, $this->getRootAlias()), $select);
+        $this->queryBuilder->select($selectList);
     }
 
     private function replaceEntityPlaceholder(string $value, string $entityName): string

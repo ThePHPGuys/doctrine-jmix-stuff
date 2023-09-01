@@ -7,7 +7,7 @@ use Misterx\DoctrineJmix\Data\Condition;
 use Misterx\DoctrineJmix\Data\Sort;
 
 
-final class Query
+class Query
 {
     /**
      * @var Parameter[]
@@ -91,4 +91,8 @@ final class Query
         return $this;
     }
 
+    public static function create(): self
+    {
+        return new self();
+    }
 }

@@ -125,6 +125,6 @@ final class ViewBuilder
                 $viewProperties[] = new ViewProperty($property, $propertyView);
             }
         }
-        return new View('', $viewProperties);
+        return new View(properties: $viewProperties);
     }
 }

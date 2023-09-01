@@ -11,6 +11,7 @@ final class QueryTransformerStub implements QueryTransformer
 {
     private array $joins = [];
     private array $where = [];
+    private array $select = [];
     private bool $isCountQuery = false;
     /**
      * @var array<string,Direction>
@@ -77,6 +78,17 @@ final class QueryTransformerStub implements QueryTransformer
     public function getOrderBy(): array
     {
         return array_map(fn(Direction $o) => $o->value, $this->orderBy);
+    }
+
+    public function replaceSelect(array $select): void
+    {
+        $this->select = $select;
+    }
+
+
+    public function getSelect(): array
+    {
+        return $this->select;
     }
 
 

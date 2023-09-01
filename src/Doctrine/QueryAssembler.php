@@ -11,7 +11,6 @@ use Misterx\DoctrineJmix\Data\LoadContext\Parameter;
 use Misterx\DoctrineJmix\Data\Sort;
 use Misterx\DoctrineJmix\Data\View;
 use Misterx\DoctrineJmix\Doctrine\Condition\ConditionGenerationContext;
-use Misterx\DoctrineJmix\Doctrine\Condition\ConditionGeneratorResolver;
 use Misterx\DoctrineJmix\MetaDataTools;
 use Misterx\DoctrineJmix\MetaModel\MetaData;
 use Misterx\DoctrineJmix\QueryParamValuesProvider;
@@ -35,13 +34,16 @@ final class QueryAssembler
     private ?Sort $sort = null;
     private ?Query $resultQuery = null;
     private ?View $view = null;
+    private bool $countQuery = false;
+    private ?QueryBuilder $queryBuilder = null;
 
     public function __construct(
         private readonly MetaData                 $metaData,
         private readonly MetaDataTools            $metaDataTools,
         private readonly QuerySortProcessor       $sortProcessor,
         private readonly QueryParamValuesProvider $paramValuesProvider,
-        private readonly QueryConditionProcessor  $queryConditionProcessor
+        private readonly QueryConditionProcessor  $queryConditionProcessor,
+        private readonly QueryViewProcessor       $queryViewProcessor
     )
     {
 
@@ -110,6 +112,11 @@ final class QueryAssembler
         return $this;
     }
 
+    public function setQueryBuilder(?QueryBuilder $queryBuilder): self
+    {
+        $this->queryBuilder = $queryBuilder;
+    }
+
     public function assembleQuery(EntityManagerInterface $entityManager): Query
     {
         return $this->getResultQuery($entityManager);
@@ -140,6 +147,18 @@ final class QueryAssembler
             throw new \InvalidArgumentException('EntityName must be provided');
         }
 
+        $queryBuilder = $this->queryBuilder ?? $this->createDefaultQueryBuilder($em);
+        $queryTransformer = new QueryBuilderTransformer($queryBuilder);
+        $this->applySorting($queryTransformer);
+        $this->applyFiltering($queryTransformer);
+        $this->applyView($queryTransformer);
+        $this->applyCount($queryTransformer);
+
+        return $queryTransformer->getQuery();
+    }
+
+    private function createDefaultQueryBuilder(EntityManagerInterface $em): QueryBuilder
+    {
         $queryBuilder = $em->createQueryBuilder();
         $metaClass = $this->metaData->getByName($this->entityName);
         $queryBuilder->select('e')->from($metaClass->getClassName(), 'e');
@@ -153,11 +172,7 @@ final class QueryAssembler
                 ->andWhere(sprintf('e.%s IN :entityIds', $this->metaDataTools->getPrimaryKeyPropertyName($metaClass)));
             $this->parameters[] = new Parameter('entityIds', $this->ids);
         }
-        $queryTransformer = new QueryBuilderTransformer($queryBuilder);
-        $this->applySorting($queryTransformer);
-        $this->applyFiltering($queryTransformer);
-        $this->applyView($queryTransformer);
-        return $queryTransformer->getQuery();
+        return $queryBuilder;
     }
 
     private function applySorting(QueryTransformer $queryTransformer): void
@@ -201,8 +216,16 @@ final class QueryAssembler
 
     private function applyView(QueryTransformer $queryTransformer): void
     {
-        if (!$this->view) {
+        if (!$this->view || $this->countQuery) {
             return;
+        }
+        $this->queryViewProcessor->process($queryTransformer, $this->view, $this->entityName);
+    }
+
+    private function applyCount(QueryBuilderTransformer $queryTransformer): void
+    {
+        if ($this->countQuery) {
+            $queryTransformer->replaceWithCount();
         }
     }
 

@@ -25,4 +25,6 @@ interface QueryTransformer
      */
     public function replaceOrderByExpressions(array $sortExpressions): void;
 
+    public function replaceSelect(array $select): void;
+
 }

@@ -3,6 +3,10 @@
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
+use Misterx\DoctrineJmix\Doctrine\Condition\ConditionGeneratorResolver;
+use Misterx\DoctrineJmix\Doctrine\Condition\LogicalConditionGenerator;
+use Misterx\DoctrineJmix\Doctrine\Condition\PropertyConditionGenerator;
+use Misterx\DoctrineJmix\QueryParamValuesProvider;
 use Psr\Log\AbstractLogger;
 
 require_once "vendor/autoload.php";
@@ -28,14 +32,33 @@ $doctrineLoader = new \Misterx\DoctrineJmix\Doctrine\DoctrineMetaDataLoader($doc
 $classes = array_map(fn(\Doctrine\Persistence\Mapping\ClassMetadata $cmd) => $cmd->getName(), $doctrineMetadataFactory->getAllMetadata());
 $doctrineLoader->load($classes, $metaData, $doctrineStoreName);
 $metadataTools = new \Misterx\DoctrineJmix\MetaDataTools();
-$viewsRepository = new \Misterx\DoctrineJmix\DefaultViewsRepository($metadataTools);
+$viewBuilderFactory = new \Misterx\DoctrineJmix\ViewBuilderFactory($metaData, $metadataTools);
+$viewsRepository = new \Misterx\DoctrineJmix\DefaultViewsRepository($metaData, $viewBuilderFactory);
+$viewBuilderFactory->setRepository($viewsRepository);
 $viewResolver = new \Misterx\DoctrineJmix\ViewResolver(
     $viewsRepository,
     $metaData
 );
 $aliasGenerator = new \Misterx\DoctrineJmix\Doctrine\AliasGenerator();
 $queryBuilderSortProcessor = new \Misterx\DoctrineJmix\Doctrine\QuerySortProcessor($metaData, $aliasGenerator, $metadataTools);
-$queryAssemblerFactory = new \Misterx\DoctrineJmix\Doctrine\QueryAssemblerFactory($metaData, $metadataTools, $queryBuilderSortProcessor);
+$queryParamValuesProvider = new QueryParamValuesProvider();
+
+$conditionResolver = new ConditionGeneratorResolver();
+$conditionResolver->addGenerator(new LogicalConditionGenerator($conditionResolver));
+$conditionResolver->addGenerator(new PropertyConditionGenerator($metaData, $aliasGenerator));
+$queryConditionProcessor = new \Misterx\DoctrineJmix\Doctrine\QueryConditionProcessor($conditionResolver);
+
+$queryViewProcessor = new \Misterx\DoctrineJmix\Doctrine\QueryViewProcessor($metaData, $aliasGenerator);
+
+$queryAssemblerFactory = new \Misterx\DoctrineJmix\Doctrine\QueryAssemblerFactory(
+    $metaData,
+    $metadataTools,
+    $queryBuilderSortProcessor,
+    $queryParamValuesProvider,
+    $queryConditionProcessor,
+    $queryViewProcessor,
+);
+
 $doctrineDataStore = new \Misterx\DoctrineJmix\Doctrine\DoctrineDataStore($entityManager, $queryAssemblerFactory);
 $dataStores = new \Misterx\DoctrineJmix\Data\DataStores([
     $doctrineStoreName => $doctrineDataStore

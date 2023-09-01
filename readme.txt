@@ -284,3 +284,15 @@ LoadContext<User> context = LoadContext.create(User.class).setQuery(
  List<User> users = dataManager.loadList(context);
 
  https://docs.jmix.io/jmix/data-access/data-manager.html
+
+ ------------------------ FetchPlan builder
+
+ fetchPlans.builder(Order.class)
+.addFetchPlan(FetchPlan.BASE)
+.add("orderLines", FetchPlan.BASE, FetchMode.UNDEFINED)
+.add("orderLines.product", FetchPlan.BASE, FetchMode.UNDEFINED)
+
+----- В DataStore треба використовувати ViewBuilder бо треба додати системні поля, хоча хз по факту це ж раніше мало б бути
+(new View())->addProperty('lines.product');
+При (new View())->addProperty('lines.product') буде вертатись ['lines']['product'] = 'uuid';
+При (new View())->addProperty('lines.product',View::BASE) буде вертатись ['lines']['product'] = Product base struct;

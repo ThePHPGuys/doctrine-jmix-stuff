@@ -58,7 +58,8 @@ readonly class DefaultViewsRepository implements ViewsRepository
         $builder = $this->viewBuilderFactory->create($metaClass->getClassName());
         $builder->addSystem();
         foreach ($metaClass->getProperties() as $metaProperty) {
-            if (!$metaProperty->getRange()->isClass()) {
+            //TODO:
+            if (!$metaProperty->getRange()->isClass() && !$metaProperty->isTransient()) {
                 $builder->addProperty($metaProperty->getName());
             }
         }

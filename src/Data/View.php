@@ -19,7 +19,7 @@ final class View
     /**
      * @param ViewProperty[] $properties
      */
-    public function __construct(public readonly ?string $name = null, /** string $entityClass, */ array $properties = [])
+    public function __construct(array $properties = [], public readonly ?string $name = null)
     {
         foreach ($properties as $property) {
             assert($property instanceof ViewProperty);
