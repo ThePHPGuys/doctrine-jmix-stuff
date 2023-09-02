@@ -94,8 +94,6 @@ final class DoctrineDataStore extends DataStore\AbstractDataStore
                 $query->setMaxResults($contextQuery->getLimit());
             }
         }
-        dump($query->getSQL());
-        dump($query->getParameters());
         return $query;
     }
 

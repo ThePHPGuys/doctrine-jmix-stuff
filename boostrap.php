@@ -17,7 +17,10 @@ $config = ORMSetup::createAttributeMetadataConfiguration(
 $config->setMiddlewares([new \Doctrine\DBAL\Logging\Middleware(new class extends AbstractLogger {
     public function log($level, $message, array $context = []): void
     {
-        //print_r(func_get_args());
+        if ($level !== 'debug') {
+            return;
+        }
+        dump($context);
     }
 })]);
 $connection = DriverManager::getConnection([
