@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Misterx\DoctrineJmix\Doctrine\Condition;
 
+use Misterx\DoctrineJmix\Data\Condition;
 use Misterx\DoctrineJmix\Data\Condition\LogicalCondition;
 use Misterx\DoctrineJmix\Data\Condition\Type;
 
@@ -59,5 +60,11 @@ final readonly class LogicalConditionGenerator implements ConditionGenerator
         }
         return $joins;
     }
+
+    public function generateParameterValue(Condition $condition, mixed $parameterValue): mixed
+    {
+        return null;
+    }
+
 
 }

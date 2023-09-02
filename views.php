@@ -2,6 +2,7 @@
 
 use Doctrine\ORM\EntityManagerInterface;
 use Misterx\DoctrineJmix\Data\Condition\LogicalCondition;
+use Misterx\DoctrineJmix\Data\Condition\Operation;
 use Misterx\DoctrineJmix\Data\Condition\PropertyCondition;
 use Misterx\DoctrineJmix\Data\LoadContext;
 use Misterx\DoctrineJmix\Data\LoadContext\Query;
@@ -41,7 +42,7 @@ require 'boostrap.php';
 ////$dataManager->loadList(new \Misterx\DoctrineJmix\Data\LoadContext($ordersMeta));
 //dd($as->assembleQuery($entityManager)->getDQL());
 
-
+$queryProcessStart = microtime(true);
 $view = $viewBuilderFactory->create(OrderEntity::class)
     ->addView(View::LOCAL)
     ->addProperty('client', View::LOCAL)
@@ -50,8 +51,8 @@ $view = $viewBuilderFactory->create(OrderEntity::class)
 
 $condition = LogicalCondition::or(
     PropertyCondition::equal('client.name', 'John'),
-    PropertyCondition::equal('client.name', 'Jack'),
-    PropertyCondition::equal('client', 'someClientId'),
+    PropertyCondition::createWithParameter('client', Operation::EQUAL, 'currentUser'),
+    PropertyCondition::createWithParameter('createdAt', Operation::LESS, 'today'),
 );
 $sort = Sort::by(
     Order::desc('createdAt'),
@@ -59,7 +60,7 @@ $sort = Sort::by(
 );
 
 $context = new LoadContext($metaData->getByClass(OrderEntity::class));
-$context->setView($view);
+//$context->setView($view);
 $context->setQuery(
     Query::create()
         ->setCondition($condition)
@@ -68,4 +69,7 @@ $context->setQuery(
         ->setOffset(1)
 );
 
-$dataManager->loadList($context);
+$t = $dataManager->loadList($context);
+
+
+echo "Query processing took: " . (microtime(true) - $queryProcessStart) . ' s' . PHP_EOL;

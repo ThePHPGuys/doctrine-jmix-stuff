@@ -7,13 +7,13 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Misterx\DoctrineJmix\Data\Condition;
-use Misterx\DoctrineJmix\Data\LoadContext\Parameter;
+use Misterx\DoctrineJmix\Data\LoadContext\ParameterValue;
 use Misterx\DoctrineJmix\Data\Sort;
 use Misterx\DoctrineJmix\Data\View;
 use Misterx\DoctrineJmix\Doctrine\Condition\ConditionGenerationContext;
 use Misterx\DoctrineJmix\MetaDataTools;
 use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\QueryParamValuesProvider;
+use Misterx\DoctrineJmix\QueryParamValuesManager;
 
 final class QueryAssembler
 {
@@ -28,22 +28,34 @@ final class QueryAssembler
     private ?Condition $condition = null;
     private ?string $queryString = null;
     /**
-     * @var Parameter[]
+     * @var array<string,mixed>
      */
     private array $parameters = [];
+
+    /**
+     * @var array<string,mixed>
+     */
+    private array $resultParameters = [];
+
     private ?Sort $sort = null;
     private ?Query $resultQuery = null;
     private ?View $view = null;
     private bool $countQuery = false;
     private ?QueryBuilder $queryBuilder = null;
+    /**
+     * @var callable(QueryTransformer):void
+     */
+    private $onBuildHandler;
+    private array $resultParametersFromProvider = [];
 
     public function __construct(
-        private readonly MetaData                 $metaData,
-        private readonly MetaDataTools            $metaDataTools,
-        private readonly QuerySortProcessor       $sortProcessor,
-        private readonly QueryParamValuesProvider $paramValuesProvider,
-        private readonly QueryConditionProcessor  $queryConditionProcessor,
-        private readonly QueryViewProcessor       $queryViewProcessor
+        private readonly MetaData                          $metaData,
+        private readonly MetaDataTools                     $metaDataTools,
+        private readonly QuerySortProcessor                $sortProcessor,
+        private readonly QueryParamValuesManager           $paramValuesProvider,
+        private readonly QueryConditionProcessor           $queryConditionProcessor,
+        private readonly QueryConditionParametersProcessor $queryConditionParametersProcessor,
+        private readonly QueryViewProcessor                $queryViewProcessor,
     )
     {
 
@@ -85,7 +97,7 @@ final class QueryAssembler
     }
 
     /**
-     * @param Parameter[] $parameters
+     * @param array<string,mixed> $parameters
      * @return $this
      */
     public function setQueryParameters(array $parameters): self
@@ -119,7 +131,23 @@ final class QueryAssembler
 
     public function assembleQuery(EntityManagerInterface $entityManager): Query
     {
-        return $this->getResultQuery($entityManager);
+        $query = $this->getResultQuery($entityManager);
+
+
+        $allParameters = $this->resultParameters;
+
+        foreach ($this->resultParametersFromProvider as $parameter) {
+            $allParameters[$parameter] = $this->paramValuesProvider->getValue($parameter);
+        }
+
+        foreach ($allParameters as $parameterName => $parameterValue) {
+            if ($parameterValue instanceof ParameterValue) {
+                $query->setParameter($parameterName, $parameterValue->getValue(), $parameterValue->isTypeWasSpecified() ? $parameterValue->getType() : null);
+            } else {
+                $query->setParameter($parameterName, $parameterValue);
+            }
+        }
+        return $query;
     }
 
     private function getResultQuery(EntityManagerInterface $em): Query
@@ -130,15 +158,18 @@ final class QueryAssembler
         return $this->resultQuery;
     }
 
+    /**
+     * @param callable(QueryTransformer):void $onBuildHandler
+     * @return void
+     */
+    public function onBuild(callable $onBuildHandler): void
+    {
+        $this->onBuildHandler = $onBuildHandler;
+    }
+
     private function buildResultQuery(EntityManagerInterface $em): Query
     {
-        //Може э зміст створювати query builder і з ним працювати, чим працювати з DQL
-        //Тобто якщо вказана queryString то нічого не робити, бо ми по факту нічого і не зможем зробити
-        //Хіба перевірити якщо починається на WHERE то просто додати до умов
-        //Для фільтрів дивитись io.jmix.data.impl.jpql.generator.ConditionJpqlGenerator#processQuery
-        //query_conditions/QueryConditionsTest.groovy:115
-        //Ще варіант такий, якщо в запиті присутньо Where то не додавати умови, інакше додати умови
-        //Або не дозволяти з where запити, питання з join???
+        $this->resultParameters = $this->parameters;
         if ($this->queryString) {
             return $em->createQuery($this->queryString);
         }
@@ -153,6 +184,9 @@ final class QueryAssembler
         $this->applyFiltering($queryTransformer);
         $this->applyView($queryTransformer);
         $this->applyCount($queryTransformer);
+        if ($this->onBuildHandler) {
+            ($this->onBuildHandler)($queryTransformer);
+        }
 
         return $queryTransformer->getQuery();
     }
@@ -166,11 +200,11 @@ final class QueryAssembler
         if ($this->id) {
             $queryBuilder
                 ->andWhere(sprintf('e.%s = :entityId', $this->metaDataTools->getPrimaryKeyPropertyName($metaClass)));
-            $this->parameters[] = new Parameter('entityId', $this->id);
+            $this->resultParameters['entityId'] = $this->id;
         } elseif ($this->ids) {
             $queryBuilder
                 ->andWhere(sprintf('e.%s IN :entityIds', $this->metaDataTools->getPrimaryKeyPropertyName($metaClass)));
-            $this->parameters[] = new Parameter('entityIds', $this->ids);
+            $this->resultParameters['entityIds'] = $this->ids;
         }
         return $queryBuilder;
     }
@@ -190,14 +224,14 @@ final class QueryAssembler
         }
         //Provided parameters
         $providedParameters = array_keys($this->parameters);
-
+        $parametersFromProvider = [];
         //$this->condition->getParameters() - Required parameters by conditions
-
         foreach ($this->condition->getParameters() as $parameter) {
             if (!$this->paramValuesProvider->supports($parameter)) {
                 continue;
             }
             $providedParameters[] = $parameter;
+            $parametersFromProvider[] = $parameter;
         }
 
         $actualizedConditions = $this->condition->actualize($providedParameters);
@@ -206,8 +240,12 @@ final class QueryAssembler
             //We have no conditions
             return;
         }
-        //If we have actual conditions, we need to feel parameters with values that was provided by provider
-        //TODO: Generate parameters values
+        $this->resultParametersFromProvider = $parametersFromProvider;
+        $this->resultParameters = $this->queryConditionParametersProcessor->process(
+            $this->resultParameters,
+            $this->parameters,
+            $actualizedConditions
+        );
 
         $conditionGenerationContext = new ConditionGenerationContext($actualizedConditions);
         $conditionGenerationContext->setEntityName($this->entityName);
@@ -216,7 +254,7 @@ final class QueryAssembler
 
     private function applyView(QueryTransformer $queryTransformer): void
     {
-        if (!$this->view || $this->countQuery) {
+        if (!$this->view) {
             return;
         }
         $this->queryViewProcessor->process($queryTransformer, $this->view, $this->entityName);
@@ -228,6 +266,5 @@ final class QueryAssembler
             $queryTransformer->replaceWithCount();
         }
     }
-
 
 }

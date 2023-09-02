@@ -16,7 +16,7 @@ final class ConditionUtils
      * @template T of Condition
      * @param Condition $rootCondition
      * @param class-string<T> $nestedConditionClassName
-     * @return list<T>
+     * @return T[]
      */
     public static function collectNestedConditions(Condition $rootCondition, string $nestedConditionClassName = Condition::class): array
     {

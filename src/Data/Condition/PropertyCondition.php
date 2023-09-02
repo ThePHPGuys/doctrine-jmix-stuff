@@ -10,7 +10,7 @@ final readonly class PropertyCondition implements Condition, Stringable
 {
     private string $property;
     private Operation $operation;
-    private mixed $value;
+    private mixed $parameterValue;
     private string $parameterName;
 
 
@@ -29,9 +29,9 @@ final readonly class PropertyCondition implements Condition, Stringable
         return $this->operation;
     }
 
-    public function getValue(): mixed
+    public function getParameterValue(): mixed
     {
-        return $this->value;
+        return $this->parameterValue;
     }
 
     public function getParameterName(): string
@@ -46,7 +46,7 @@ final readonly class PropertyCondition implements Condition, Stringable
 
     public function actualize(array $actualParameters): ?Condition
     {
-        if ($this->value) {
+        if ($this->parameterValue) {
             return $this;
         }
 
@@ -62,7 +62,7 @@ final readonly class PropertyCondition implements Condition, Stringable
         $condition = new self();
         $condition->property = $property;
         $condition->operation = $operation;
-        $condition->value = $value;
+        $condition->parameterValue = $value;
         $condition->parameterName = ConditionUtils::generateParameterName($property);
         return $condition;
     }
@@ -72,7 +72,7 @@ final readonly class PropertyCondition implements Condition, Stringable
         $condition = new self();
         $condition->property = $property;
         $condition->operation = $operation;
-        $condition->value = null;
+        $condition->parameterValue = null;
         $condition->parameterName = $parameter;
         return $condition;
     }
@@ -87,7 +87,7 @@ final readonly class PropertyCondition implements Condition, Stringable
         return sprintf('[%s %s %s]',
             $this->property,
             $this->operation->value,
-            $this->value ? json_encode($this->value) : ':' . $this->parameterName
+            $this->parameterValue ? json_encode($this->parameterValue) : ':' . $this->parameterName
         );
     }
 

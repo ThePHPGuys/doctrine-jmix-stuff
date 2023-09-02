@@ -29,7 +29,7 @@ abstract class AbstractDataStore implements DataStore
         return $event;
     }
 
-    public function load(LoadContext $context): ?object
+    public function load(LoadContext $context): object|array|null
     {
         $loadState = new EventSharedState();
         $beforeEventResult = $this->dispatch(new BeforeLoadEvent($context, $loadState));
@@ -92,7 +92,7 @@ abstract class AbstractDataStore implements DataStore
 
     abstract protected function loadAll(LoadContext $context): iterable;
 
-    abstract protected function loadOne(LoadContext $context): ?object;
+    abstract protected function loadOne(LoadContext $context): object|array|null;
 
     abstract protected function count(LoadContext $context): int;
 

@@ -5,17 +5,18 @@ namespace Misterx\DoctrineJmix\Doctrine;
 
 use Misterx\DoctrineJmix\MetaDataTools;
 use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\QueryParamValuesProvider;
+use Misterx\DoctrineJmix\QueryParamValuesManager;
 
 final readonly class QueryAssemblerFactory
 {
     public function __construct(
-        private MetaData                 $metaData,
-        private MetaDataTools            $metaDataTools,
-        private QuerySortProcessor       $sortProcessor,
-        private QueryParamValuesProvider $paramValuesProvider,
-        private QueryConditionProcessor  $queryConditionProcessor,
-        private QueryViewProcessor       $queryViewProcessor
+        private MetaData                          $metaData,
+        private MetaDataTools                     $metaDataTools,
+        private QuerySortProcessor                $sortProcessor,
+        private QueryParamValuesManager           $paramValuesProvider,
+        private QueryConditionProcessor           $queryConditionProcessor,
+        private QueryConditionParametersProcessor $queryConditionParametersProcessor,
+        private QueryViewProcessor                $queryViewProcessor
     )
     {
 
@@ -29,6 +30,7 @@ final readonly class QueryAssemblerFactory
             $this->sortProcessor,
             $this->paramValuesProvider,
             $this->queryConditionProcessor,
+            $this->queryConditionParametersProcessor,
             $this->queryViewProcessor
         );
     }

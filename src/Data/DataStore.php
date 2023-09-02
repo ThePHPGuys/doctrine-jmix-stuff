@@ -5,7 +5,7 @@ namespace Misterx\DoctrineJmix\Data;
 
 interface DataStore
 {
-    public function load(LoadContext $context): ?object;
+    public function load(LoadContext $context): object|array|null;
 
     public function loadList(LoadContext $context): iterable;
 

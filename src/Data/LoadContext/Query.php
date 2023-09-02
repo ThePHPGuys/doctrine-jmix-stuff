@@ -10,7 +10,7 @@ use Misterx\DoctrineJmix\Data\Sort;
 class Query
 {
     /**
-     * @var Parameter[]
+     * @var array<string,mixed>
      */
     private array $parameters = [];
 
@@ -25,9 +25,9 @@ class Query
     }
 
 
-    public function setParameter(string $name, mixed $value, string $type = null): static
+    public function setParameter(string $name, mixed $value): self
     {
-        $this->parameters[] = new Parameter($name, $value, $type);
+        $this->parameters[$name] = $value;
         return $this;
     }
 

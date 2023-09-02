@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Misterx\DoctrineJmix\Doctrine\Condition;
 
+use Misterx\DoctrineJmix\Data\Condition;
 use Misterx\DoctrineJmix\Data\Condition\ConditionUtils;
 use Misterx\DoctrineJmix\Data\Condition\PropertyCondition;
 use Misterx\DoctrineJmix\Doctrine\AliasGenerator;
@@ -94,5 +95,24 @@ final readonly class PropertyConditionGenerator implements ConditionGenerator
             $condition->getParameterName()
         );
     }
+
+    public function generateParameterValue(Condition $condition, mixed $parameterValue): mixed
+    {
+        assert($condition instanceof PropertyCondition);
+        if ($parameterValue === null) {
+            return null;
+        }
+        if (is_scalar($parameterValue)) {
+            return match ($condition->getOperation()) {
+                Condition\Operation::CONTAINS,
+                Condition\Operation::NOT_CONTAINS => '%' . $parameterValue . '%',
+                Condition\Operation::STARTS_WITH => $parameterValue . '%',
+                Condition\Operation::ENDS_WITH => '%' . $parameterValue,
+                default => $parameterValue
+            };
+        }
+        return $parameterValue;
+    }
+
 
 }

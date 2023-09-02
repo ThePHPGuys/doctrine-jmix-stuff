@@ -3,18 +3,11 @@ declare(strict_types=1);
 
 namespace Misterx\DoctrineJmix\Data\LoadContext;
 
-final class Parameter
+final readonly class ParameterValue
 {
-    private mixed $type;
-
-    public function __construct(private readonly string|int $name, private readonly mixed $value, mixed $type = null)
+    public function __construct(private mixed $value, private mixed $type = null)
     {
-        $this->type = $type;
-    }
 
-    public function getName(): string|int
-    {
-        return $this->name;
     }
 
     public function getValue(): mixed

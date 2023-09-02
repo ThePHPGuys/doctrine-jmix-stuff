@@ -8,7 +8,7 @@ use Misterx\DoctrineJmix\Data\LoadContext;
 /**
  * @template T of object
  */
-final class AfterLoadEvent
+final class AfterLoadEvent implements DataStoreEvent
 {
     /** @var array<T> */
     private array $excludedEntities = [];
