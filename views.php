@@ -72,4 +72,4 @@ $context->setQuery(
 $t = $dataManager->loadList($context);
 
 
-echo "Query processing took: " . (microtime(true) - $queryProcessStart) . ' s' . PHP_EOL;
+//echo "Query processing took: " . (microtime(true) - $queryProcessStart) . ' s' . PHP_EOL;

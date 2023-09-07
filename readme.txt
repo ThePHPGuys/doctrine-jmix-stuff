@@ -296,3 +296,6 @@ LoadContext<User> context = LoadContext.create(User.class).setQuery(
 (new View())->addProperty('lines.product');
 При (new View())->addProperty('lines.product') буде вертатись ['lines']['product'] = 'uuid';
 При (new View())->addProperty('lines.product',View::BASE) буде вертатись ['lines']['product'] = Product base struct;
+
+
+EntityAttributeContext перервіряється на этапі серіалізації і десериалізації. Оскільки датаменеджер працює вже напряму з Entity

@@ -18,6 +18,11 @@ final class MetaData
         return $this->findByClass($class);
     }
 
+    public function getByObject(object $object): MetaClass
+    {
+        return $this->findByClass(get_class($object));
+    }
+
     public function findByName(string $name): ?MetaClass
     {
         return array_key_exists($name, $this->byName) ? $this->byName[$name] : null;

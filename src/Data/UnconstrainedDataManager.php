@@ -13,5 +13,7 @@ interface UnconstrainedDataManager
 
     public function save(SaveContext $context);
 
-    public function remove(SaveContext $context);
+    public function removeEntity(object ...$entities);
+
+    public function saveEntity(object ...$entities);
 }

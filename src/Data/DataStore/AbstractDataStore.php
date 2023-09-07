@@ -86,7 +86,17 @@ abstract class AbstractDataStore implements DataStore
 
     public function save(SaveContext $context)
     {
-
+        $saveState = new EventSharedState();
+        $beforeSaveEventResult = $this->dispatch(new BeforeSaveEvent($context, $saveState));
+        if ($beforeSaveEventResult->savePrevented()) {
+            return;
+        }
+        $savedEntities = $this->saveAll($context);
+        $this->dispatch(new EntitySavingEvent($context, $savedEntities, $saveState));
+        $deletedEntities = $this->removeAll($context);
+        $this->dispatch(new EntityDeletingEvent($context, $deletedEntities, $saveState));
+        $this->beforeSaveCommit($context, $savedEntities, $deletedEntities);
+        $this->commitSave();
     }
 
 
@@ -96,5 +106,12 @@ abstract class AbstractDataStore implements DataStore
 
     abstract protected function count(LoadContext $context): int;
 
-    abstract protected function commit(SaveContext $context): mixed;
+    abstract protected function saveAll(SaveContext $context): iterable;
+
+    abstract protected function removeAll(SaveContext $context): iterable;
+
+    abstract protected function beforeSaveCommit(SaveContext $context, iterable $savedEntities, iterable $deletedEntities): void;
+
+    abstract protected function commitSave(): void;
+
 }

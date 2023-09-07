@@ -9,8 +9,18 @@ final class BeforeLoadEvent implements DataStoreEvent
 {
     private bool $loadPrevented = false;
 
-    public function __construct(readonly public LoadContext $loadContext, readonly public EventSharedState $eventState)
+    public function __construct(private readonly LoadContext $loadContext, private readonly EventSharedState $eventState)
     {
+    }
+
+    public function getLoadContext(): LoadContext
+    {
+        return $this->loadContext;
+    }
+
+    public function getEventState(): EventSharedState
+    {
+        return $this->eventState;
     }
 
     public function preventLoad(): void

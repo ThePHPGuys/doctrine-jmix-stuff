@@ -43,11 +43,6 @@ final class DoctrineDataStore extends DataStore\AbstractDataStore
         return (int)$this->createQuery($this->entityManager, $context, true)->getScalarResult();
     }
 
-    protected function commit(SaveContext $context): mixed
-    {
-        // TODO: Implement commit() method.
-    }
-
     private function createQuery(EntityManagerInterface $entityManager, LoadContext $context, bool $countQuery): Query
     {
         $contextQuery = $context->getQuery();
@@ -100,6 +95,39 @@ final class DoctrineDataStore extends DataStore\AbstractDataStore
     private function createView(LoadContext $context): View
     {
         return $context->getView() ?? $this->viewsRepository->getMetaClassView($context->getMetaClass(), View::BASE);
+    }
+
+    protected function saveAll(SaveContext $context): iterable
+    {
+        $result = [];
+        foreach ($context->getEntitiesToSave() as $entity) {
+            if (!$this->entityManager->contains($entity)) {
+                $this->entityManager->persist($entity);
+            }
+            $result[] = $entity;
+        }
+        return $result;
+    }
+
+    protected function removeAll(SaveContext $context): iterable
+    {
+        $result = [];
+        foreach ($context->getEntitiesToRemove() as $entity) {
+            $this->entityManager->remove($entity);
+            $result[] = $entity;
+        }
+
+        return $result;
+    }
+
+    protected function beforeSaveCommit(SaveContext $context, iterable $savedEntities, iterable $deletedEntities): void
+    {
+        //This method can be used if dispatch final changing event needed
+    }
+
+    protected function commitSave(): void
+    {
+        $this->entityManager->flush();
     }
 
 }

@@ -9,12 +9,13 @@ use Misterx\DoctrineJmix\Data\LoadContext;
 use Misterx\DoctrineJmix\Data\SaveContext;
 use Misterx\DoctrineJmix\Data\UnconstrainedDataManager;
 use Misterx\DoctrineJmix\MetaModel\MetaClass;
+use Misterx\DoctrineJmix\MetaModel\MetaData;
 use Misterx\DoctrineJmix\Security\AccessConstraint;
 
 final class UnconstrainedDataManagerImpl implements UnconstrainedDataManager
 {
 
-    public function __construct(private readonly DataStores $dataStores)
+    public function __construct(private readonly DataStores $dataStores, private readonly MetaData $metaData)
     {
 
     }
@@ -51,13 +52,57 @@ final class UnconstrainedDataManagerImpl implements UnconstrainedDataManager
 
     public function save(SaveContext $context)
     {
-        // TODO: Implement save() method.
+        $clonedContext = clone $context;
+        $clonedContext->setConstraints($this->mergeConstraints($clonedContext->getConstraints()));
+        /** @var array<string,SaveContext> $storeToContext */
+        $storeToContext = [];
+        //Create aggregated contexts by storeName
+        foreach ($clonedContext->getEntitiesToSave() as $entity) {
+            $metadata = $this->metaData->getByObject($entity);
+            $this->getOrCreateSaveContext($storeToContext, $metadata->getStore(), $clonedContext)->saving($entity);
+        }
+        foreach ($clonedContext->getEntitiesToRemove() as $entity) {
+            $metadata = $this->metaData->getByObject($entity);
+            $this->getOrCreateSaveContext($storeToContext, $metadata->getStore(), $clonedContext)->removing($entity);
+        }
+
+        foreach ($storeToContext as $storeName => $context) {
+            $this->saveContextToStore($storeName, $context);
+        }
     }
 
-    public function remove(SaveContext $context)
+    /**
+     * @param array<string,SaveContext> $contexts
+     * @return SaveContext
+     */
+    private function getOrCreateSaveContext(array &$contexts, string $storeName, SaveContext $saveContext): SaveContext
     {
-        // TODO: Implement remove() method.
+        if (!array_key_exists($storeName, $contexts)) {
+            return $contexts[$storeName] = $this->createSaveContext($saveContext);
+        }
+        return $contexts[$storeName];
     }
+
+    private function createSaveContext(SaveContext $saveContext): SaveContext
+    {
+        return (new SaveContext())->setConstraints($saveContext->getConstraints());
+    }
+
+    private function saveContextToStore(string $storeName, SaveContext $saveContext)
+    {
+        $this->dataStores->get($storeName)->save($saveContext);
+    }
+
+    public function removeEntity(object ...$entities)
+    {
+        $this->save((new SaveContext())->removing(...$entities));
+    }
+
+    public function saveEntity(object ...$entities)
+    {
+        $this->save((new SaveContext())->saving(...$entities));
+    }
+
 
     private function getDataStore(MetaClass $class): DataStore
     {

@@ -94,6 +94,6 @@ $doctrineDataStore = new \Misterx\DoctrineJmix\Doctrine\DoctrineDataStore($entit
 $dataStores = new \Misterx\DoctrineJmix\Data\DataStores([
     $doctrineStoreName => $doctrineDataStore
 ]);
-$dataManager = new \Misterx\DoctrineJmix\UnconstrainedDataManagerImpl($dataStores);
+$dataManager = new \Misterx\DoctrineJmix\UnconstrainedDataManagerImpl($dataStores, $metaData);
 $aliasGenerator = new \Misterx\DoctrineJmix\Doctrine\AliasGenerator();
-echo "Initialization took: " . (microtime(true) - $initStart) . " s" . PHP_EOL;
+//echo "Initialization took: " . (microtime(true) - $initStart) . " s" . PHP_EOL;

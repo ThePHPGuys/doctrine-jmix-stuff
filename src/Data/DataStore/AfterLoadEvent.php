@@ -16,9 +16,20 @@ final class AfterLoadEvent implements DataStoreEvent
     /**
      * @param iterable<T> $entities
      */
-    public function __construct(public readonly LoadContext $context, private readonly iterable $entities, public readonly EventSharedState $loadState)
+    public function __construct(private readonly LoadContext $loadContext, private readonly iterable $entities, private readonly EventSharedState $eventState)
     {
     }
+
+    public function getLoadContext(): LoadContext
+    {
+        return $this->loadContext;
+    }
+
+    public function getEventState(): EventSharedState
+    {
+        return $this->eventState;
+    }
+
 
     public function excludeEntity(object $excludedEntity): void
     {
