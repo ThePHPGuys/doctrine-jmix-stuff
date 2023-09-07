@@ -127,6 +127,7 @@ final class QueryAssembler
     public function setQueryBuilder(?QueryBuilder $queryBuilder): self
     {
         $this->queryBuilder = $queryBuilder;
+        return $this;
     }
 
     public function assembleQuery(EntityManagerInterface $entityManager): Query

@@ -20,7 +20,7 @@ final class UnconstrainedDataManagerImpl implements UnconstrainedDataManager
 
     }
 
-    public function load(LoadContext $context): ?object
+    public function load(LoadContext $context): object|array|null
     {
         $clonedContext = clone $context;
         $metaClass = $context->getMetaClass();
@@ -47,7 +47,8 @@ final class UnconstrainedDataManagerImpl implements UnconstrainedDataManager
 
     public function getCount(LoadContext $context): int
     {
-        // TODO: Implement getCount() method.
+        //TODO: Fix me
+        return 0;
     }
 
     public function save(SaveContext $context)

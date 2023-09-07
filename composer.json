@@ -24,6 +24,7 @@
         "doctrine/data-fixtures": "^1.6",
         "fzaninotto/faker": "^1.5",
         "phpunit/phpunit": "10",
-        "symfony/var-dumper": "^6.3"
+        "symfony/var-dumper": "^6.3",
+        "vimeo/psalm": "^5.15"
     }
 }

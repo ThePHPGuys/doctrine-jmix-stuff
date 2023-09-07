@@ -5,7 +5,7 @@ namespace Misterx\DoctrineJmix\Data\Condition;
 
 use Misterx\DoctrineJmix\Data\Condition;
 
-final class LogicalCondition implements Condition, \Stringable
+final class LogicalCondition implements Condition
 {
     /**
      * @var Condition[]
@@ -74,7 +74,7 @@ final class LogicalCondition implements Condition, \Stringable
         return new self(Type::OR, ...$conditions);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return '(' . implode(' ' . $this->type->value . ' ', $this->conditions) . ')';
     }

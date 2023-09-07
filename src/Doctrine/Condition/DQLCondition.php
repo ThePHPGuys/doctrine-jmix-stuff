@@ -97,4 +97,9 @@ final class DQLCondition implements Condition
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return 'join and where';
+    }
+
 }

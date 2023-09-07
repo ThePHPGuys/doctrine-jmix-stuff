@@ -39,7 +39,9 @@ abstract class AbstractDataStore implements DataStore
         }
 
         $entity = $this->loadOne($context);
-
+        if (!$entity) {
+            return null;
+        }
         $afterEventResult = $this->dispatch(new AfterLoadEvent($context, [$entity], $loadState));
 
         return $afterEventResult->getResultEntity();
@@ -67,7 +69,7 @@ abstract class AbstractDataStore implements DataStore
         $loadState = new EventSharedState();
         $beforeEventResult = $this->dispatch(new BeforeCountEvent($context, $loadState));
 
-        if ($beforeEventResult->loadPrevented()) {
+        if ($beforeEventResult->countPrevented()) {
             return 0;
         }
 
@@ -81,7 +83,7 @@ abstract class AbstractDataStore implements DataStore
          */
         $items = $this->loadAll($countContext);
         $afterEventResult = $this->dispatch(new AfterLoadEvent($context, $items, $loadState));
-        return count($afterEventResult->getResultEntities());
+        return count([...$afterEventResult->getResultEntities()]);
     }
 
     public function save(SaveContext $context)

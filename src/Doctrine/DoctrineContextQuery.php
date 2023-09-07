@@ -13,6 +13,7 @@ final class DoctrineContextQuery extends Query
     public function setQueryBuilder(QueryBuilder $queryBuilder): self
     {
         $this->queryBuilder = $queryBuilder;
+        return $this;
     }
 
     public function getQueryBuilder(): ?QueryBuilder

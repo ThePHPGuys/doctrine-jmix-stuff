@@ -6,7 +6,7 @@ namespace Misterx\DoctrineJmix\Data\Condition;
 use Misterx\DoctrineJmix\Data\Condition;
 use Stringable;
 
-final readonly class PropertyCondition implements Condition, Stringable
+final class PropertyCondition implements Condition, Stringable
 {
     private string $property;
     private Operation $operation;

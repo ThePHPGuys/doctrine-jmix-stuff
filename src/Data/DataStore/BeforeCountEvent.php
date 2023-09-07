@@ -5,7 +5,7 @@ namespace Misterx\DoctrineJmix\Data\DataStore;
 
 use Misterx\DoctrineJmix\Data\LoadContext;
 
-final class BeforeCountEvent
+final class BeforeCountEvent implements DataStoreEvent
 {
 
     private bool $countPrevented = false;
@@ -36,7 +36,7 @@ final class BeforeCountEvent
         return $this->countPrevented;
     }
 
-    public function setCountByItems(): bool
+    public function setCountByItems(): void
     {
         $this->countByItems = true;
     }

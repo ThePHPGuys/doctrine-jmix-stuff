@@ -8,7 +8,7 @@ interface DataStoreEventDispatcher
     /**
      * @template T of DataStoreEvent
      * @param T $event
-     * @return DataStoreEvent The Event that was passed, now modified by listeners.
+     * @return T The Event that was passed, now modified by listeners.
      */
     public function dispatch(DataStoreEvent $event): DataStoreEvent;
 }

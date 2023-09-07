@@ -5,11 +5,11 @@ namespace Misterx\DoctrineJmix;
 
 use Misterx\DoctrineJmix\MetaModel\MetaData;
 
-readonly final class ViewBuilderFactory
+final class ViewBuilderFactory
 {
     private ViewsRepository $viewsRepository;
 
-    public function __construct(private MetaData $metaData, private MetaDataTools $metaDataTools)
+    public function __construct(private readonly MetaData $metaData, private readonly MetaDataTools $metaDataTools)
     {
 
     }

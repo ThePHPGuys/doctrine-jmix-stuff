@@ -47,7 +47,7 @@ final class QueryBuilderTransformer implements QueryTransformer
     public function replaceWithCount(): void
     {
         $this->queryBuilder->select(sprintf('COUNT(%s)', $this->getRootAlias()));
-        $this->queryBuilder->resetDQLParts('orderBy');
+        $this->queryBuilder->resetDQLParts(['orderBy']);
     }
 
     public function getQuery(): Query

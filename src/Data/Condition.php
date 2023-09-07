@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Misterx\DoctrineJmix\Data;
 
-interface Condition
+interface Condition extends \Stringable
 {
     /**
      * Returns parameter names specified in the condition.

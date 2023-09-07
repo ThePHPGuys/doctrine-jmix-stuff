@@ -54,7 +54,7 @@ final readonly class QuerySortProcessor
 
     /**
      * @param list<array{MetaPropertyPath,Direction}> $propertiesWithDirection
-     * @return array<list<string>,array<string,string>> Return sort strings and required joins
+     * @return list{array<string,Direction>, array<string,string>} Return sort strings and required joins
      */
     private function getSortExpressions(array $propertiesWithDirection): array
     {
@@ -102,7 +102,7 @@ final readonly class QuerySortProcessor
     /**
      * @param MetaPropertyPath $metaPropertyPath
      * @param Direction $direction
-     * @return array<string, array<string,string>> - return sort expression and joins<alias,join>
+     * @return list{array<string,Direction>, array<string,string>} - return sort expression and joins<alias,join>
      */
     private function getDatatypeSortExpression(MetaPropertyPath $metaPropertyPath, Direction $direction): array
     {

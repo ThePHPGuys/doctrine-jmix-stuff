@@ -6,11 +6,11 @@ namespace Misterx\DoctrineJmix\Data\DataStore;
 use Misterx\DoctrineJmix\Data\LoadContext;
 
 /**
- * @template T of object
+ * @template T of array|object
  */
 final class AfterLoadEvent implements DataStoreEvent
 {
-    /** @var array<T> */
+    /** @var T[] */
     private array $excludedEntities = [];
 
     /**
@@ -30,8 +30,10 @@ final class AfterLoadEvent implements DataStoreEvent
         return $this->eventState;
     }
 
-
-    public function excludeEntity(object $excludedEntity): void
+    /**
+     * @param T $excludedEntity
+     */
+    public function excludeEntity(object|array $excludedEntity): void
     {
         $this->excludedEntities[] = $excludedEntity;
     }
@@ -55,6 +57,6 @@ final class AfterLoadEvent implements DataStoreEvent
         if (!$this->excludedEntities) {
             return $this->entities;
         }
-        return array_filter($this->entities, fn(object $entity) => !in_array($entity, $this->excludedEntities));
+        return array_filter([...$this->entities], fn(object $entity) => !in_array($entity, $this->excludedEntities));
     }
 }
