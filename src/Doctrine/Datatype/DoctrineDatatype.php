@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine\Datatype;
+namespace TPG\PMix\Doctrine\Datatype;
 
-use Misterx\DoctrineJmix\MetaModel\Datatype;
+use TPG\PMix\MetaModel\Datatype;
 
 final readonly class DoctrineDatatype implements Datatype
 {

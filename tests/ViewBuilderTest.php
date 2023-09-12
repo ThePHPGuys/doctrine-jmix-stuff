@@ -1,18 +1,18 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests;
+namespace TPG\PMix\Tests;
 
-use Misterx\DoctrineJmix\Data\View;
-use Misterx\DoctrineJmix\DefaultViewsRepository;
-use Misterx\DoctrineJmix\Doctrine\AliasGenerator;
-use Misterx\DoctrineJmix\Doctrine\QuerySortProcessor;
-use Misterx\DoctrineJmix\MetaDataTools;
-use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Order;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Product;
-use Misterx\DoctrineJmix\ViewBuilder;
-use Misterx\DoctrineJmix\ViewBuilderFactory;
-use Misterx\DoctrineJmix\ViewsRepository;
+use TPG\PMix\Data\View;
+use TPG\PMix\DefaultViewsRepository;
+use TPG\PMix\Doctrine\AliasGenerator;
+use TPG\PMix\Doctrine\QuerySortProcessor;
+use TPG\PMix\MetaDataTools;
+use TPG\PMix\MetaModel\MetaData;
+use TPG\PMix\Tests\Entity\MetadataLoader\Order;
+use TPG\PMix\Tests\Entity\MetadataLoader\Product;
+use TPG\PMix\ViewBuilder;
+use TPG\PMix\ViewBuilderFactory;
+use TPG\PMix\ViewsRepository;
 use PHPUnit\Framework\TestCase;
 use function Symfony\Component\String\s;
 

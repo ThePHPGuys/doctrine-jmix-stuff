@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Tests\Entity\MetadataLoader;
+namespace TPG\PMix\Tests\Entity\MetadataLoader;
 
 use Doctrine\ORM\Mapping as ORM;
 

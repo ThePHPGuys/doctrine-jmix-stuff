@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\MetaModel;
+namespace TPG\PMix\MetaModel;
 
 use ReflectionMethod;
 use ReflectionProperty;

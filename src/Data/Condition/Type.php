@@ -1,6 +1,6 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Data\Condition;
+namespace TPG\PMix\Data\Condition;
 
 enum Type: string
 {

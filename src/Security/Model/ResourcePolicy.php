@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Security\Model;
+namespace TPG\PMix\Security\Model;
 
 interface ResourcePolicy
 {

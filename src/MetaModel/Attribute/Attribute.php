@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\MetaModel\Attribute;
+namespace TPG\PMix\MetaModel\Attribute;
 
 interface Attribute
 {

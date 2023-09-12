@@ -1,6 +1,6 @@
 <?php
 
-namespace Misterx\DoctrineJmix\MetaModel;
+namespace TPG\PMix\MetaModel;
 
 abstract class MetaObject
 {

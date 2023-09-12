@@ -1,8 +1,8 @@
 <?php
 
-namespace Misterx\DoctrineJmix\MetaModel;
+namespace TPG\PMix\MetaModel;
 
-use Misterx\DoctrineJmix\MetaModel\Datatype\Enumeration;
+use TPG\PMix\MetaModel\Datatype\Enumeration;
 
 interface Range
 {

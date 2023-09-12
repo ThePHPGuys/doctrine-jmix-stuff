@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine\FetchPlan;
+namespace TPG\PMix\Tests\Doctrine\FetchPlan;
 
-use Misterx\DoctrineJmix\Declined\Data\FetchPlan\DataLoader;
+use TPG\PMix\Declined\Data\FetchPlan\DataLoader;
 
 final class ArrayDataLoader implements DataLoader
 {

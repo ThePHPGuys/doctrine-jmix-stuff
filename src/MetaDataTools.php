@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix;
+namespace TPG\PMix;
 
-use Misterx\DoctrineJmix\MetaModel\MetaClass;
-use Misterx\DoctrineJmix\MetaModel\MetaProperty;
+use TPG\PMix\MetaModel\MetaClass;
+use TPG\PMix\MetaModel\MetaProperty;
 
 class MetaDataTools
 {

@@ -3,10 +3,10 @@
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMSetup;
-use Misterx\DoctrineJmix\Doctrine\Condition\ConditionGeneratorResolver;
-use Misterx\DoctrineJmix\Doctrine\Condition\LogicalConditionGenerator;
-use Misterx\DoctrineJmix\Doctrine\Condition\PropertyConditionGenerator;
-use Misterx\DoctrineJmix\QueryParamValuesManager;
+use TPG\PMix\Doctrine\Condition\ConditionGeneratorResolver;
+use TPG\PMix\Doctrine\Condition\LogicalConditionGenerator;
+use TPG\PMix\Doctrine\Condition\PropertyConditionGenerator;
+use TPG\PMix\QueryParamValuesManager;
 use Psr\Log\AbstractLogger;
 
 require_once "vendor/autoload.php";
@@ -28,7 +28,7 @@ $connection = DriverManager::getConnection([
     'path' => __DIR__ . '/db.sqlite',
 ], $config);
 
-$todayProvider = new class implements \Misterx\DoctrineJmix\QueryParamValueProvider {
+$todayProvider = new class implements \TPG\PMix\QueryParamValueProvider {
     public function supports(string $parameterName): bool
     {
         return $parameterName === 'today';
@@ -40,7 +40,7 @@ $todayProvider = new class implements \Misterx\DoctrineJmix\QueryParamValueProvi
     }
 
 };
-$currentUserProvider = new class implements \Misterx\DoctrineJmix\QueryParamValueProvider {
+$currentUserProvider = new class implements \TPG\PMix\QueryParamValueProvider {
     public function supports(string $parameterName): bool
     {
         return $parameterName === 'currentUser';
@@ -56,31 +56,31 @@ $initStart = microtime(true);
 $doctrineStoreName = 'doctrine';
 $entityManager = new EntityManager($connection, $config);
 $doctrineMetadataFactory = $entityManager->getMetadataFactory();
-$metaData = new \Misterx\DoctrineJmix\MetaModel\MetaData();
-$doctrineLoader = new \Misterx\DoctrineJmix\Doctrine\DoctrineMetaDataLoader($doctrineMetadataFactory);
+$metaData = new \TPG\PMix\MetaModel\MetaData();
+$doctrineLoader = new \TPG\PMix\Doctrine\DoctrineMetaDataLoader($doctrineMetadataFactory);
 $classes = array_map(fn(\Doctrine\Persistence\Mapping\ClassMetadata $cmd) => $cmd->getName(), $doctrineMetadataFactory->getAllMetadata());
 $doctrineLoader->load($classes, $metaData, $doctrineStoreName);
-$metadataTools = new \Misterx\DoctrineJmix\MetaDataTools();
-$accessManager = new \Misterx\DoctrineJmix\Security\AccessManager();
-$viewBuilderFactory = new \Misterx\DoctrineJmix\ViewBuilderFactory($metaData, $metadataTools);
-$viewsRepository = new \Misterx\DoctrineJmix\DefaultViewsRepository($metaData, $viewBuilderFactory);
+$metadataTools = new \TPG\PMix\MetaDataTools();
+$accessManager = new \TPG\PMix\Security\AccessManager();
+$viewBuilderFactory = new \TPG\PMix\ViewBuilderFactory($metaData, $metadataTools);
+$viewsRepository = new \TPG\PMix\DefaultViewsRepository($metaData, $viewBuilderFactory);
 $viewBuilderFactory->setRepository($viewsRepository);
-$viewResolver = new \Misterx\DoctrineJmix\ViewResolver(
+$viewResolver = new \TPG\PMix\ViewResolver(
     $viewsRepository,
     $metaData
 );
-$aliasGenerator = new \Misterx\DoctrineJmix\Doctrine\AliasGenerator();
-$queryBuilderSortProcessor = new \Misterx\DoctrineJmix\Doctrine\QuerySortProcessor($metaData, $aliasGenerator, $metadataTools);
+$aliasGenerator = new \TPG\PMix\Doctrine\AliasGenerator();
+$queryBuilderSortProcessor = new \TPG\PMix\Doctrine\QuerySortProcessor($metaData, $aliasGenerator, $metadataTools);
 $queryParamValuesProvider = new QueryParamValuesManager([$todayProvider, $currentUserProvider]);
 
 $conditionResolver = new ConditionGeneratorResolver();
 $conditionResolver->addGenerator(new LogicalConditionGenerator($conditionResolver));
 $conditionResolver->addGenerator(new PropertyConditionGenerator($metaData, $aliasGenerator));
-$queryConditionProcessor = new \Misterx\DoctrineJmix\Doctrine\QueryConditionProcessor($conditionResolver);
-$queryConditionParametersProcessor = new \Misterx\DoctrineJmix\Doctrine\QueryConditionParametersProcessor($conditionResolver);
-$queryViewProcessor = new \Misterx\DoctrineJmix\Doctrine\QueryViewProcessor($metaData, $aliasGenerator);
+$queryConditionProcessor = new \TPG\PMix\Doctrine\QueryConditionProcessor($conditionResolver);
+$queryConditionParametersProcessor = new \TPG\PMix\Doctrine\QueryConditionParametersProcessor($conditionResolver);
+$queryViewProcessor = new \TPG\PMix\Doctrine\QueryViewProcessor($metaData, $aliasGenerator);
 
-$queryAssemblerFactory = new \Misterx\DoctrineJmix\Doctrine\QueryAssemblerFactory(
+$queryAssemblerFactory = new \TPG\PMix\Doctrine\QueryAssemblerFactory(
     $metaData,
     $metadataTools,
     $queryBuilderSortProcessor,
@@ -90,10 +90,10 @@ $queryAssemblerFactory = new \Misterx\DoctrineJmix\Doctrine\QueryAssemblerFactor
     $queryViewProcessor,
 );
 
-$doctrineDataStore = new \Misterx\DoctrineJmix\Doctrine\DoctrineDataStore($entityManager, $queryAssemblerFactory, $viewsRepository, $accessManager);
-$dataStores = new \Misterx\DoctrineJmix\Data\DataStores([
+$doctrineDataStore = new \TPG\PMix\Doctrine\DoctrineDataStore($entityManager, $queryAssemblerFactory, $viewsRepository, $accessManager);
+$dataStores = new \TPG\PMix\Data\DataStores([
     $doctrineStoreName => $doctrineDataStore
 ]);
-$dataManager = new \Misterx\DoctrineJmix\UnconstrainedDataManagerImpl($dataStores, $metaData);
-$aliasGenerator = new \Misterx\DoctrineJmix\Doctrine\AliasGenerator();
+$dataManager = new \TPG\PMix\UnconstrainedDataManagerImpl($dataStores, $metaData);
+$aliasGenerator = new \TPG\PMix\Doctrine\AliasGenerator();
 //echo "Initialization took: " . (microtime(true) - $initStart) . " s" . PHP_EOL;

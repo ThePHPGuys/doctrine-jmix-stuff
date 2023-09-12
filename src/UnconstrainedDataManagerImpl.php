@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix;
+namespace TPG\PMix;
 
-use Misterx\DoctrineJmix\Data\DataStore;
-use Misterx\DoctrineJmix\Data\DataStores;
-use Misterx\DoctrineJmix\Data\LoadContext;
-use Misterx\DoctrineJmix\Data\SaveContext;
-use Misterx\DoctrineJmix\Data\UnconstrainedDataManager;
-use Misterx\DoctrineJmix\MetaModel\MetaClass;
-use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\Security\AccessConstraint;
+use TPG\PMix\Data\DataStore;
+use TPG\PMix\Data\DataStores;
+use TPG\PMix\Data\LoadContext;
+use TPG\PMix\Data\SaveContext;
+use TPG\PMix\Data\UnconstrainedDataManager;
+use TPG\PMix\MetaModel\MetaClass;
+use TPG\PMix\MetaModel\MetaData;
+use TPG\PMix\Security\AccessConstraint;
 
 final class UnconstrainedDataManagerImpl implements UnconstrainedDataManager
 {

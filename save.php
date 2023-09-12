@@ -1,21 +1,21 @@
 <?php
 
 use Doctrine\ORM\EntityManagerInterface;
-use Misterx\DoctrineJmix\Data\Condition\LogicalCondition;
-use Misterx\DoctrineJmix\Data\Condition\Operation;
-use Misterx\DoctrineJmix\Data\Condition\PropertyCondition;
-use Misterx\DoctrineJmix\Data\LoadContext;
-use Misterx\DoctrineJmix\Data\LoadContext\Query;
-use Misterx\DoctrineJmix\Data\Order;
-use Misterx\DoctrineJmix\Data\Sort;
-use Misterx\DoctrineJmix\Data\View;
-use Misterx\DoctrineJmix\Doctrine\QueryAssemblerFactory;
-use Misterx\DoctrineJmix\Entity\Order as OrderEntity;
-use Misterx\DoctrineJmix\MetaDataTools;
-use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\UnconstrainedDataManagerImpl;
-use Misterx\DoctrineJmix\ViewBuilderFactory;
-use Misterx\DoctrineJmix\ViewResolver;
+use TPG\PMix\Data\Condition\LogicalCondition;
+use TPG\PMix\Data\Condition\Operation;
+use TPG\PMix\Data\Condition\PropertyCondition;
+use TPG\PMix\Data\LoadContext;
+use TPG\PMix\Data\LoadContext\Query;
+use TPG\PMix\Data\Order;
+use TPG\PMix\Data\Sort;
+use TPG\PMix\Data\View;
+use TPG\PMix\Doctrine\QueryAssemblerFactory;
+use TPG\PMix\Entity\Order as OrderEntity;
+use TPG\PMix\MetaDataTools;
+use TPG\PMix\MetaModel\MetaData;
+use TPG\PMix\UnconstrainedDataManagerImpl;
+use TPG\PMix\ViewBuilderFactory;
+use TPG\PMix\ViewResolver;
 
 require 'boostrap.php';
 
@@ -30,7 +30,7 @@ require 'boostrap.php';
  */
 
 $oe = new OrderEntity();
-$cl = new \Misterx\DoctrineJmix\Entity\Client();
+$cl = new \TPG\PMix\Entity\Client();
 $cl->name = 'BlaBla';
 $oe->client = $cl;
 

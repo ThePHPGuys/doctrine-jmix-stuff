@@ -1,10 +1,10 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests\Data\Middleware;
+namespace TPG\PMix\Tests\Data\Middleware;
 
-use Misterx\DoctrineJmix\Data\DataContext;
-use Misterx\DoctrineJmix\Data\Middleware\Middleware;
-use Misterx\DoctrineJmix\Data\Middleware\Pipeline;
+use TPG\PMix\Data\DataContext;
+use TPG\PMix\Data\Middleware\Middleware;
+use TPG\PMix\Data\Middleware\Pipeline;
 use PHPUnit\Framework\TestCase;
 
 class PipelineTest extends TestCase

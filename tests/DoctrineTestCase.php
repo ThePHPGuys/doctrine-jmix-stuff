@@ -1,28 +1,28 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Tests;
+namespace TPG\PMix\Tests;
 
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMSetup;
-use Misterx\DoctrineJmix\DefaultViewsRepository;
-use Misterx\DoctrineJmix\Doctrine\AliasGenerator;
-use Misterx\DoctrineJmix\Doctrine\Condition\ConditionGeneratorResolver;
-use Misterx\DoctrineJmix\Doctrine\Condition\LogicalConditionGenerator;
-use Misterx\DoctrineJmix\Doctrine\Condition\PropertyConditionGenerator;
-use Misterx\DoctrineJmix\Doctrine\DoctrineMetaDataLoader;
-use Misterx\DoctrineJmix\MetaDataTools;
-use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Action;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Address;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Client;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Order;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\OrderLine;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Product;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Tag;
-use Misterx\DoctrineJmix\ViewBuilderFactory;
+use TPG\PMix\DefaultViewsRepository;
+use TPG\PMix\Doctrine\AliasGenerator;
+use TPG\PMix\Doctrine\Condition\ConditionGeneratorResolver;
+use TPG\PMix\Doctrine\Condition\LogicalConditionGenerator;
+use TPG\PMix\Doctrine\Condition\PropertyConditionGenerator;
+use TPG\PMix\Doctrine\DoctrineMetaDataLoader;
+use TPG\PMix\MetaDataTools;
+use TPG\PMix\MetaModel\MetaData;
+use TPG\PMix\Tests\Entity\MetadataLoader\Action;
+use TPG\PMix\Tests\Entity\MetadataLoader\Address;
+use TPG\PMix\Tests\Entity\MetadataLoader\Client;
+use TPG\PMix\Tests\Entity\MetadataLoader\Order;
+use TPG\PMix\Tests\Entity\MetadataLoader\OrderLine;
+use TPG\PMix\Tests\Entity\MetadataLoader\Product;
+use TPG\PMix\Tests\Entity\MetadataLoader\Tag;
+use TPG\PMix\ViewBuilderFactory;
 use PHPUnit\Framework\TestCase;
 
 abstract class DoctrineTestCase extends TestCase

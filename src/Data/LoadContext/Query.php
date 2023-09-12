@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Data\LoadContext;
+namespace TPG\PMix\Data\LoadContext;
 
-use Misterx\DoctrineJmix\Data\Condition;
-use Misterx\DoctrineJmix\Data\Sort;
+use TPG\PMix\Data\Condition;
+use TPG\PMix\Data\Sort;
 
 
 class Query

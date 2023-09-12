@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine\Stubs;
+namespace TPG\PMix\Tests\Doctrine\Stubs;
 
 use Doctrine\ORM\Query;
-use Misterx\DoctrineJmix\Data\Direction;
-use Misterx\DoctrineJmix\Doctrine\QueryTransformer;
+use TPG\PMix\Data\Direction;
+use TPG\PMix\Doctrine\QueryTransformer;
 
 final class QueryTransformerStub implements QueryTransformer
 {

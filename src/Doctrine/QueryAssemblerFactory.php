@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine;
+namespace TPG\PMix\Doctrine;
 
-use Misterx\DoctrineJmix\MetaDataTools;
-use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\QueryParamValuesManager;
+use TPG\PMix\MetaDataTools;
+use TPG\PMix\MetaModel\MetaData;
+use TPG\PMix\QueryParamValuesManager;
 
 final readonly class QueryAssemblerFactory
 {

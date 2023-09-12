@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Data\DataStore;
+namespace TPG\PMix\Data\DataStore;
 
-use Misterx\DoctrineJmix\Data\DataStore;
-use Misterx\DoctrineJmix\Data\LoadContext;
-use Misterx\DoctrineJmix\Data\SaveContext;
+use TPG\PMix\Data\DataStore;
+use TPG\PMix\Data\LoadContext;
+use TPG\PMix\Data\SaveContext;
 
 abstract class AbstractDataStore implements DataStore
 {

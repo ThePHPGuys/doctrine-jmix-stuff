@@ -1,26 +1,26 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine;
+namespace TPG\PMix\Tests\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Misterx\DoctrineJmix\Doctrine\DoctrineMetaDataLoader;
-use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\MetaModel\MetaPropertyType;
-use Misterx\DoctrineJmix\MetaModel\RangeCardinality;
-use Misterx\DoctrineJmix\Tests\DoctrineTestCase;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Associated;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Client;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\InverseO2O;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Order;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\OrderLine;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\OwningO2O;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Product;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\ScalarEntity;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Tag;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Unidirectional;
-use Misterx\DoctrineJmix\Tests\Entity\SameEntityAssociation\Followers;
-use Misterx\DoctrineJmix\Tests\Entity\SameEntityAssociation\User;
+use TPG\PMix\Doctrine\DoctrineMetaDataLoader;
+use TPG\PMix\MetaModel\MetaData;
+use TPG\PMix\MetaModel\MetaPropertyType;
+use TPG\PMix\MetaModel\RangeCardinality;
+use TPG\PMix\Tests\DoctrineTestCase;
+use TPG\PMix\Tests\Entity\MetadataLoader\Associated;
+use TPG\PMix\Tests\Entity\MetadataLoader\Client;
+use TPG\PMix\Tests\Entity\MetadataLoader\InverseO2O;
+use TPG\PMix\Tests\Entity\MetadataLoader\Order;
+use TPG\PMix\Tests\Entity\MetadataLoader\OrderLine;
+use TPG\PMix\Tests\Entity\MetadataLoader\OwningO2O;
+use TPG\PMix\Tests\Entity\MetadataLoader\Product;
+use TPG\PMix\Tests\Entity\MetadataLoader\ScalarEntity;
+use TPG\PMix\Tests\Entity\MetadataLoader\Tag;
+use TPG\PMix\Tests\Entity\MetadataLoader\Unidirectional;
+use TPG\PMix\Tests\Entity\SameEntityAssociation\Followers;
+use TPG\PMix\Tests\Entity\SameEntityAssociation\User;
 
 final class MetadataLoaderTest extends DoctrineTestCase
 {

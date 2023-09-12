@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine;
+namespace TPG\PMix\Doctrine;
 
-use Misterx\DoctrineJmix\Data\Condition\ConditionUtils;
-use Misterx\DoctrineJmix\Data\Condition\PropertyCondition;
-use Misterx\DoctrineJmix\Doctrine\Condition\ConditionGenerationContext;
-use Misterx\DoctrineJmix\Doctrine\Condition\ConditionGeneratorResolver;
+use TPG\PMix\Data\Condition\ConditionUtils;
+use TPG\PMix\Data\Condition\PropertyCondition;
+use TPG\PMix\Doctrine\Condition\ConditionGenerationContext;
+use TPG\PMix\Doctrine\Condition\ConditionGeneratorResolver;
 
 final readonly class QueryConditionProcessor
 {

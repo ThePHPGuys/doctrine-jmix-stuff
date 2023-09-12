@@ -1,6 +1,6 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Data;
+namespace TPG\PMix\Data;
 
 enum Direction: string
 {

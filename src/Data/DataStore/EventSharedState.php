@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Data\DataStore;
+namespace TPG\PMix\Data\DataStore;
 
 final class EventSharedState
 {

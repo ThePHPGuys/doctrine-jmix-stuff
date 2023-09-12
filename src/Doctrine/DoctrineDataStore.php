@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine;
+namespace TPG\PMix\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Query;
-use Misterx\DoctrineJmix\Data\DataStore;
-use Misterx\DoctrineJmix\Data\LoadContext;
-use Misterx\DoctrineJmix\Data\SaveContext;
-use Misterx\DoctrineJmix\Data\View;
-use Misterx\DoctrineJmix\Security\AccessManager;
-use Misterx\DoctrineJmix\Security\ReadEntityQueryContext;
-use Misterx\DoctrineJmix\ViewsRepository;
+use TPG\PMix\Data\DataStore;
+use TPG\PMix\Data\LoadContext;
+use TPG\PMix\Data\SaveContext;
+use TPG\PMix\Data\View;
+use TPG\PMix\Security\AccessManager;
+use TPG\PMix\Security\ReadEntityQueryContext;
+use TPG\PMix\ViewsRepository;
 
 final class DoctrineDataStore extends DataStore\AbstractDataStore
 {

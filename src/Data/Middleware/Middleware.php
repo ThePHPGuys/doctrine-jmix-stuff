@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Data\Middleware;
+namespace TPG\PMix\Data\Middleware;
 
-use Misterx\DoctrineJmix\Data\DataContext;
+use TPG\PMix\Data\DataContext;
 
 interface Middleware
 {

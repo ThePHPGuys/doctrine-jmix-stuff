@@ -1,18 +1,18 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine;
+namespace TPG\PMix\Tests\Doctrine;
 
-use Misterx\DoctrineJmix\Declined\Data\FetchPlanCalculator;
-use Misterx\DoctrineJmix\Declined\Data\FetchPlanCalculatorResult;
-use Misterx\DoctrineJmix\Declined\View;
-use Misterx\DoctrineJmix\Doctrine\DoctrineMetaDataLoader;
-use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\Tests\DoctrineTestCase;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Client;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Order;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\OrderLine;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Product;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Tag;
+use TPG\PMix\Declined\Data\FetchPlanCalculator;
+use TPG\PMix\Declined\Data\FetchPlanCalculatorResult;
+use TPG\PMix\Declined\View;
+use TPG\PMix\Doctrine\DoctrineMetaDataLoader;
+use TPG\PMix\MetaModel\MetaData;
+use TPG\PMix\Tests\DoctrineTestCase;
+use TPG\PMix\Tests\Entity\MetadataLoader\Client;
+use TPG\PMix\Tests\Entity\MetadataLoader\Order;
+use TPG\PMix\Tests\Entity\MetadataLoader\OrderLine;
+use TPG\PMix\Tests\Entity\MetadataLoader\Product;
+use TPG\PMix\Tests\Entity\MetadataLoader\Tag;
 
 class FetchPlanCalculatorTest extends DoctrineTestCase
 {

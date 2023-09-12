@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Data\LoadContext;
+namespace TPG\PMix\Data\LoadContext;
 
 final readonly class ParameterValue
 {

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine;
+namespace TPG\PMix\Doctrine;
 
 use Doctrine\ORM\QueryBuilder;
-use Misterx\DoctrineJmix\Data\LoadContext\Query;
+use TPG\PMix\Data\LoadContext\Query;
 
 final class DoctrineContextQuery extends Query
 {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Data;
+namespace TPG\PMix\Data;
 
 /**
  * Base interface for all datastore contexts

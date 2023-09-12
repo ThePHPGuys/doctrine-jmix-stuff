@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Data\Condition;
+namespace TPG\PMix\Data\Condition;
 
 enum Operation: string
 {

@@ -1,3 +1,15 @@
+Restrictions!
+
+По факту, всі моделі які повертаються через DataManager, повинні бути detached, а під час збереження, для існуючих моделей мав би робитись
+$entityManger->merge. Це зроблено для того, що  якщо якийсь код викличе flush дані моделі не збереглися, а зберігались тільки через DataManager.
+Оскільки merge deprecated, то в нас всі моделі зареєстровані в UOW тому треба бути обережним в виклику flush.
+
+
+---------------------------------------------------------
+
+
+
+
 Типа в кубе сделано через инвенты, но хз зачем
 
 Типа у них логика такая
@@ -299,3 +311,9 @@ LoadContext<User> context = LoadContext.create(User.class).setQuery(
 
 
 EntityAttributeContext перервіряється на этапі серіалізації і десериалізації. Оскільки датаменеджер працює вже напряму з Entity
+
+
+Security
+Для PredicateRowLevelPolicy перевіряються всі рут ентіті, та всі дочірні. Наприклад якщо ми завантажуємо Order та OrderLine, то в предікат попаде все
+
+io.jmix.data.impl.DataStoreInMemoryCrudListener#entityLoading

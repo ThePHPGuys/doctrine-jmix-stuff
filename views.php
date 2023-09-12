@@ -1,21 +1,21 @@
 <?php
 
 use Doctrine\ORM\EntityManagerInterface;
-use Misterx\DoctrineJmix\Data\Condition\LogicalCondition;
-use Misterx\DoctrineJmix\Data\Condition\Operation;
-use Misterx\DoctrineJmix\Data\Condition\PropertyCondition;
-use Misterx\DoctrineJmix\Data\LoadContext;
-use Misterx\DoctrineJmix\Data\LoadContext\Query;
-use Misterx\DoctrineJmix\Data\Order;
-use Misterx\DoctrineJmix\Data\Sort;
-use Misterx\DoctrineJmix\Data\View;
-use Misterx\DoctrineJmix\Doctrine\QueryAssemblerFactory;
-use Misterx\DoctrineJmix\Entity\Order as OrderEntity;
-use Misterx\DoctrineJmix\MetaDataTools;
-use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\UnconstrainedDataManagerImpl;
-use Misterx\DoctrineJmix\ViewBuilderFactory;
-use Misterx\DoctrineJmix\ViewResolver;
+use TPG\PMix\Data\Condition\LogicalCondition;
+use TPG\PMix\Data\Condition\Operation;
+use TPG\PMix\Data\Condition\PropertyCondition;
+use TPG\PMix\Data\LoadContext;
+use TPG\PMix\Data\LoadContext\Query;
+use TPG\PMix\Data\Order;
+use TPG\PMix\Data\Sort;
+use TPG\PMix\Data\View;
+use TPG\PMix\Doctrine\QueryAssemblerFactory;
+use TPG\PMix\Entity\Order as OrderEntity;
+use TPG\PMix\MetaDataTools;
+use TPG\PMix\MetaModel\MetaData;
+use TPG\PMix\UnconstrainedDataManagerImpl;
+use TPG\PMix\ViewBuilderFactory;
+use TPG\PMix\ViewResolver;
 
 require 'boostrap.php';
 /**
@@ -31,15 +31,15 @@ require 'boostrap.php';
 
 ////print_r($metaData->getClasses()[1]);
 //$ordersMeta = $metaData->getByClass(Order::class);
-////$view = $viewR->findMetaClassView($ordersMeta,\Misterx\DoctrineJmix\Data\View::LOCAL);
-//$view = new \Misterx\DoctrineJmix\Data\View(\Misterx\DoctrineJmix\Data\View::LOCAL, [
-//    new \Misterx\DoctrineJmix\Data\ViewProperty('client', new \Misterx\DoctrineJmix\Data\View(\Misterx\DoctrineJmix\Data\View::LOCAL))
+////$view = $viewR->findMetaClassView($ordersMeta,\TPG\PMix\Data\View::LOCAL);
+//$view = new \TPG\PMix\Data\View(\TPG\PMix\Data\View::LOCAL, [
+//    new \TPG\PMix\Data\ViewProperty('client', new \TPG\PMix\Data\View(\TPG\PMix\Data\View::LOCAL))
 //]);
 //
 //$as = $queryAssemblerFactory->create();
 //$as->setEntityName($ordersMeta->getName());
-//$as->setSort(\Misterx\DoctrineJmix\Data\Sort::by(new \Misterx\DoctrineJmix\Data\Order('name', \Misterx\DoctrineJmix\Data\Direction::ASC)));
-////$dataManager->loadList(new \Misterx\DoctrineJmix\Data\LoadContext($ordersMeta));
+//$as->setSort(\TPG\PMix\Data\Sort::by(new \TPG\PMix\Data\Order('name', \TPG\PMix\Data\Direction::ASC)));
+////$dataManager->loadList(new \TPG\PMix\Data\LoadContext($ordersMeta));
 //dd($as->assembleQuery($entityManager)->getDQL());
 
 $queryProcessStart = microtime(true);

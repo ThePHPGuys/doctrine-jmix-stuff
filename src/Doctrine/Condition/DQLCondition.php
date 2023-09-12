@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine\Condition;
+namespace TPG\PMix\Doctrine\Condition;
 
-use Misterx\DoctrineJmix\Data\Condition;
+use TPG\PMix\Data\Condition;
 
 final class DQLCondition implements Condition
 {

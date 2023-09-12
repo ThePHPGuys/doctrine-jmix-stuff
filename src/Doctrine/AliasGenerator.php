@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine;
+namespace TPG\PMix\Doctrine;
 
 final class AliasGenerator
 {

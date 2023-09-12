@@ -1,8 +1,8 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine\Data;
+namespace TPG\PMix\Tests\Doctrine\Data;
 
-use Misterx\DoctrineJmix\Doctrine\AliasGenerator;
+use TPG\PMix\Doctrine\AliasGenerator;
 use PHPUnit\Framework\TestCase;
 
 class AliasGeneratorTest extends TestCase

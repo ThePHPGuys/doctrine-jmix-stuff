@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine;
+namespace TPG\PMix\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
-use Misterx\DoctrineJmix\Data\Condition;
-use Misterx\DoctrineJmix\Data\LoadContext\ParameterValue;
-use Misterx\DoctrineJmix\Data\Sort;
-use Misterx\DoctrineJmix\Data\View;
-use Misterx\DoctrineJmix\Doctrine\Condition\ConditionGenerationContext;
-use Misterx\DoctrineJmix\MetaDataTools;
-use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\QueryParamValuesManager;
+use TPG\PMix\Data\Condition;
+use TPG\PMix\Data\LoadContext\ParameterValue;
+use TPG\PMix\Data\Sort;
+use TPG\PMix\Data\View;
+use TPG\PMix\Doctrine\Condition\ConditionGenerationContext;
+use TPG\PMix\MetaDataTools;
+use TPG\PMix\MetaModel\MetaData;
+use TPG\PMix\QueryParamValuesManager;
 
 final class QueryAssembler
 {

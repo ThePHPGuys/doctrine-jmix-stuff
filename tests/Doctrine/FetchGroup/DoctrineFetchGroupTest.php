@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine\FetchGroup;
+namespace TPG\PMix\Tests\Doctrine\FetchGroup;
 
 
 use Doctrine\ORM\EntityManagerInterface;
-use Misterx\DoctrineJmix\Declined\View;
-use Misterx\DoctrineJmix\Tests\DoctrineTestCase;
+use TPG\PMix\Declined\View;
+use TPG\PMix\Tests\DoctrineTestCase;
 
 final class DoctrineFetchGroupTest extends DoctrineTestCase
 {

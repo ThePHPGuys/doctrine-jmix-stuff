@@ -1,17 +1,17 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine;
+namespace TPG\PMix\Tests\Doctrine;
 
-use Misterx\DoctrineJmix\Data\Condition;
-use Misterx\DoctrineJmix\Doctrine\AliasGenerator;
-use Misterx\DoctrineJmix\Doctrine\Condition\ConditionGenerationContext;
-use Misterx\DoctrineJmix\Doctrine\QueryConditionProcessor;
-use Misterx\DoctrineJmix\Doctrine\QuerySortProcessor;
-use Misterx\DoctrineJmix\MetaDataTools;
-use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\Tests\Doctrine\Stubs\QueryTransformerStub;
-use Misterx\DoctrineJmix\Tests\DoctrineTestCase;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Order;
+use TPG\PMix\Data\Condition;
+use TPG\PMix\Doctrine\AliasGenerator;
+use TPG\PMix\Doctrine\Condition\ConditionGenerationContext;
+use TPG\PMix\Doctrine\QueryConditionProcessor;
+use TPG\PMix\Doctrine\QuerySortProcessor;
+use TPG\PMix\MetaDataTools;
+use TPG\PMix\MetaModel\MetaData;
+use TPG\PMix\Tests\Doctrine\Stubs\QueryTransformerStub;
+use TPG\PMix\Tests\DoctrineTestCase;
+use TPG\PMix\Tests\Entity\MetadataLoader\Order;
 use PHPUnit\Framework\TestCase;
 
 class QueryConditionProcessorTest extends DoctrineTestCase

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Data;
+namespace TPG\PMix\Data;
 
-use Misterx\DoctrineJmix\Security\AccessConstraint;
+use TPG\PMix\Security\AccessConstraint;
 
 class SaveContext implements DataContext
 {

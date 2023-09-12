@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Data;
+namespace TPG\PMix\Data;
 
-use Misterx\DoctrineJmix\Data\LoadContext\Query;
-use Misterx\DoctrineJmix\MetaModel\MetaClass;
-use Misterx\DoctrineJmix\Security\AccessConstraint;
+use TPG\PMix\Data\LoadContext\Query;
+use TPG\PMix\MetaModel\MetaClass;
+use TPG\PMix\Security\AccessConstraint;
 
 final class LoadContext implements DataContext
 {

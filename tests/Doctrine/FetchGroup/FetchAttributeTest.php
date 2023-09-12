@@ -1,9 +1,9 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine\FetchGroup;
+namespace TPG\PMix\Tests\Doctrine\FetchGroup;
 
-use Misterx\DoctrineJmix\Doctrine\FetchGroup\FetchAttribute;
-use Misterx\DoctrineJmix\Doctrine\FetchGroup\FetchGroup;
+use TPG\PMix\Doctrine\FetchGroup\FetchAttribute;
+use TPG\PMix\Doctrine\FetchGroup\FetchGroup;
 use PHPUnit\Framework\TestCase;
 
 class FetchAttributeTest extends TestCase

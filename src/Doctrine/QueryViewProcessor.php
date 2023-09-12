@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine;
+namespace TPG\PMix\Doctrine;
 
-use Misterx\DoctrineJmix\Data\View;
-use Misterx\DoctrineJmix\MetaModel\MetaClass;
-use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\MetaModel\MetaProperty;
-use Misterx\DoctrineJmix\MetaModel\MetaPropertyPath;
+use TPG\PMix\Data\View;
+use TPG\PMix\MetaModel\MetaClass;
+use TPG\PMix\MetaModel\MetaData;
+use TPG\PMix\MetaModel\MetaProperty;
+use TPG\PMix\MetaModel\MetaPropertyPath;
 
 final class QueryViewProcessor
 {

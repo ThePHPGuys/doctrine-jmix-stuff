@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine\Condition;
+namespace TPG\PMix\Doctrine\Condition;
 
-use Misterx\DoctrineJmix\Data\Condition;
-use Misterx\DoctrineJmix\Data\Condition\LogicalCondition;
-use Misterx\DoctrineJmix\Data\Condition\Type;
+use TPG\PMix\Data\Condition;
+use TPG\PMix\Data\Condition\LogicalCondition;
+use TPG\PMix\Data\Condition\Type;
 
 final readonly class LogicalConditionGenerator implements ConditionGenerator
 {

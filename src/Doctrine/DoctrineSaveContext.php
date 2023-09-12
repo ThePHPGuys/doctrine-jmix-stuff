@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine;
+namespace TPG\PMix\Doctrine;
 
-use Misterx\DoctrineJmix\Data\SaveContext;
+use TPG\PMix\Data\SaveContext;
 
 final class DoctrineSaveContext extends SaveContext
 {

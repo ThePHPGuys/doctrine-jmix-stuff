@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix;
+namespace TPG\PMix;
 
-use Misterx\DoctrineJmix\MetaModel\MetaData;
+use TPG\PMix\MetaModel\MetaData;
 
 final class ViewBuilderFactory
 {

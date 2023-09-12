@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\MetaModel\Datatype;
+namespace TPG\PMix\MetaModel\Datatype;
 
-use Misterx\DoctrineJmix\MetaModel\Datatype;
+use TPG\PMix\MetaModel\Datatype;
 
 final readonly class PropertyMethodDatatype implements Datatype
 {

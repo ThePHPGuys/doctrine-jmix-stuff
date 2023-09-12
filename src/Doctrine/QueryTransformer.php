@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine;
+namespace TPG\PMix\Doctrine;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
-use Misterx\DoctrineJmix\Data\Direction;
+use TPG\PMix\Data\Direction;
 
 interface QueryTransformer
 {

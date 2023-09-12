@@ -1,10 +1,10 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests\Data\Condition;
+namespace TPG\PMix\Tests\Data\Condition;
 
-use Misterx\DoctrineJmix\Data\Condition\ConditionUtils;
-use Misterx\DoctrineJmix\Data\Condition\LogicalCondition;
-use Misterx\DoctrineJmix\Data\Condition\PropertyCondition;
+use TPG\PMix\Data\Condition\ConditionUtils;
+use TPG\PMix\Data\Condition\LogicalCondition;
+use TPG\PMix\Data\Condition\PropertyCondition;
 use PHPUnit\Framework\TestCase;
 
 class ConditionUtilsTest extends TestCase

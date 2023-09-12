@@ -1,13 +1,13 @@
 {
-    "name": "misterx/doctrine-jmix",
+    "name": "thephpguys/pmix",
     "autoload": {
         "psr-4": {
-            "Misterx\\DoctrineJmix\\": "src/"
+            "TPG\\PMix\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Misterx\\DoctrineJmix\\Tests\\": "tests/"
+            "TPG\\PMix\\Tests\\": "tests/"
         }
     },
     "authors": [
@@ -17,8 +17,8 @@
         }
     ],
     "require": {
-        "doctrine/orm": "^2.14",
-        "doctrine/doctrine-laminas-hydrator": "^3.3"
+        "doctrine/orm": "^2.16",
+        "symfony/cache": "^6.3"
     },
     "require-dev": {
         "doctrine/data-fixtures": "^1.6",

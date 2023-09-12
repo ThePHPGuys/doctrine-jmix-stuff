@@ -1,14 +1,14 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine\Condition;
+namespace TPG\PMix\Tests\Doctrine\Condition;
 
-use Misterx\DoctrineJmix\Data\Condition\Operation;
-use Misterx\DoctrineJmix\Data\Condition\PropertyCondition;
-use Misterx\DoctrineJmix\Doctrine\AliasGenerator;
-use Misterx\DoctrineJmix\Doctrine\Condition\ConditionGenerationContext;
-use Misterx\DoctrineJmix\Doctrine\Condition\PropertyConditionGenerator;
-use Misterx\DoctrineJmix\Tests\DoctrineTestCase;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Order;
+use TPG\PMix\Data\Condition\Operation;
+use TPG\PMix\Data\Condition\PropertyCondition;
+use TPG\PMix\Doctrine\AliasGenerator;
+use TPG\PMix\Doctrine\Condition\ConditionGenerationContext;
+use TPG\PMix\Doctrine\Condition\PropertyConditionGenerator;
+use TPG\PMix\Tests\DoctrineTestCase;
+use TPG\PMix\Tests\Entity\MetadataLoader\Order;
 use PHPUnit\Framework\TestCase;
 
 class PropertyConditionGeneratorTest extends DoctrineTestCase

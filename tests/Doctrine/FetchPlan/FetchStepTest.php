@@ -1,11 +1,11 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine\FetchPlan;
+namespace TPG\PMix\Tests\Doctrine\FetchPlan;
 
-use Misterx\DoctrineJmix\Declined\Data\FetchPlan\ArrayKeyExtractor;
-use Misterx\DoctrineJmix\Declined\Data\FetchPlan\DataLoader;
-use Misterx\DoctrineJmix\Declined\Data\FetchPlan\DefaultDataMapper;
-use Misterx\DoctrineJmix\Declined\Data\FetchPlan\FetchStep;
+use TPG\PMix\Declined\Data\FetchPlan\ArrayKeyExtractor;
+use TPG\PMix\Declined\Data\FetchPlan\DataLoader;
+use TPG\PMix\Declined\Data\FetchPlan\DefaultDataMapper;
+use TPG\PMix\Declined\Data\FetchPlan\FetchStep;
 use PHPUnit\Framework\TestCase;
 
 class FetchStepTest extends TestCase

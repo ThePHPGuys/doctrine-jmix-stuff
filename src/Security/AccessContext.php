@@ -1,6 +1,6 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Security;
+namespace TPG\PMix\Security;
 
 interface AccessContext
 {

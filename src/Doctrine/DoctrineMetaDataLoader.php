@@ -1,26 +1,26 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine;
+namespace TPG\PMix\Doctrine;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\Persistence\Mapping\MappingException;
-use Misterx\DoctrineJmix\Doctrine\Datatype\DoctrineDatatype;
-use Misterx\DoctrineJmix\MetaDataTools;
-use Misterx\DoctrineJmix\MetaModel\Attribute\Attribute;
-use Misterx\DoctrineJmix\MetaModel\Attribute\Composition;
-use Misterx\DoctrineJmix\MetaModel\Attribute\Property;
-use Misterx\DoctrineJmix\MetaModel\Datatype;
-use Misterx\DoctrineJmix\MetaModel\MetaClass;
-use Misterx\DoctrineJmix\MetaModel\MetaData;
-use Misterx\DoctrineJmix\MetaModel\MetaProperty;
-use Misterx\DoctrineJmix\MetaModel\MetaPropertyType;
-use Misterx\DoctrineJmix\MetaModel\Range\ClassRange;
-use Misterx\DoctrineJmix\MetaModel\Range\DatatypeRange;
-use Misterx\DoctrineJmix\MetaModel\Range\EnumRange;
-use Misterx\DoctrineJmix\MetaModel\RangeCardinality;
+use TPG\PMix\Doctrine\Datatype\DoctrineDatatype;
+use TPG\PMix\MetaDataTools;
+use TPG\PMix\MetaModel\Attribute\Attribute;
+use TPG\PMix\MetaModel\Attribute\Composition;
+use TPG\PMix\MetaModel\Attribute\Property;
+use TPG\PMix\MetaModel\Datatype;
+use TPG\PMix\MetaModel\MetaClass;
+use TPG\PMix\MetaModel\MetaData;
+use TPG\PMix\MetaModel\MetaProperty;
+use TPG\PMix\MetaModel\MetaPropertyType;
+use TPG\PMix\MetaModel\Range\ClassRange;
+use TPG\PMix\MetaModel\Range\DatatypeRange;
+use TPG\PMix\MetaModel\Range\EnumRange;
+use TPG\PMix\MetaModel\RangeCardinality;
 
 final class DoctrineMetaDataLoader
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine\Data;
+namespace TPG\PMix\Tests\Doctrine\Data;
 
-use Misterx\DoctrineJmix\Doctrine\Data\JoinSelectConvertor;
+use TPG\PMix\Doctrine\Data\JoinSelectConvertor;
 use PHPUnit\Framework\TestCase;
 
 class SelectConvertorTest extends TestCase

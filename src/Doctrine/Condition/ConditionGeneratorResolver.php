@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Doctrine\Condition;
+namespace TPG\PMix\Doctrine\Condition;
 
 final class ConditionGeneratorResolver
 {

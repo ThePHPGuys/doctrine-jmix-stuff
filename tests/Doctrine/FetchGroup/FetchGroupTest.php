@@ -1,12 +1,12 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine\FetchGroup;
+namespace TPG\PMix\Tests\Doctrine\FetchGroup;
 
-use Misterx\DoctrineJmix\Doctrine\Data\AliasGenerator;
-use Misterx\DoctrineJmix\Doctrine\FetchGroup\FetchGroup;
-use Misterx\DoctrineJmix\Doctrine\FetchGroup\FetchGroupManager;
-use Misterx\DoctrineJmix\Tests\DoctrineTestCase;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Order;
+use TPG\PMix\Doctrine\Data\AliasGenerator;
+use TPG\PMix\Doctrine\FetchGroup\FetchGroup;
+use TPG\PMix\Doctrine\FetchGroup\FetchGroupManager;
+use TPG\PMix\Tests\DoctrineTestCase;
+use TPG\PMix\Tests\Entity\MetadataLoader\Order;
 use PHPUnit\Framework\TestCase;
 
 class FetchGroupTest extends DoctrineTestCase

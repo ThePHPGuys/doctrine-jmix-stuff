@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Security;
+namespace TPG\PMix\Security;
 
-use Misterx\DoctrineJmix\Doctrine\QueryTransformer;
-use Misterx\DoctrineJmix\MetaModel\MetaClass;
+use TPG\PMix\Doctrine\QueryTransformer;
+use TPG\PMix\MetaModel\MetaClass;
 
 final class ReadEntityQueryContext implements AccessContext
 {

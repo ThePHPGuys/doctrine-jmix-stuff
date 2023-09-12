@@ -1,16 +1,16 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine\Data;
+namespace TPG\PMix\Tests\Doctrine\Data;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Misterx\DoctrineJmix\Data\Sort;
-use Misterx\DoctrineJmix\Doctrine\Data\AliasGenerator;
-use Misterx\DoctrineJmix\Doctrine\Data\QueryBuilderAssembler;
-use Misterx\DoctrineJmix\Doctrine\Data\QueryBuilderAssemblerFactory;
-use Misterx\DoctrineJmix\Doctrine\Data\QueryBuilderSortGenerator;
-use Misterx\DoctrineJmix\Doctrine\MetaModel\DoctrineMetaDataTools;
-use Misterx\DoctrineJmix\Tests\DoctrineTestCase;
-use Misterx\DoctrineJmix\Tests\Entity\MetadataLoader\Order;
+use TPG\PMix\Data\Sort;
+use TPG\PMix\Doctrine\Data\AliasGenerator;
+use TPG\PMix\Doctrine\Data\QueryBuilderAssembler;
+use TPG\PMix\Doctrine\Data\QueryBuilderAssemblerFactory;
+use TPG\PMix\Doctrine\Data\QueryBuilderSortGenerator;
+use TPG\PMix\Doctrine\MetaModel\DoctrineMetaDataTools;
+use TPG\PMix\Tests\DoctrineTestCase;
+use TPG\PMix\Tests\Entity\MetadataLoader\Order;
 use PHPUnit\Framework\TestCase;
 
 class QueryBuilderAssemblerTest extends DoctrineTestCase
@@ -35,7 +35,7 @@ class QueryBuilderAssemblerTest extends DoctrineTestCase
         $assembler = $this->assemblerFactory->create();
         $assembler->setEntityClass(Order::class);
         $assembler->setIds([1]);
-        $assembler->setSort(Sort::by(\Misterx\DoctrineJmix\Data\Order::asc('name')));
+        $assembler->setSort(Sort::by(\TPG\PMix\Data\Order::asc('name')));
         $queryBuilder = $assembler->assemble($this->em);
         echo $queryBuilder->getQuery()->getDQL();
     }

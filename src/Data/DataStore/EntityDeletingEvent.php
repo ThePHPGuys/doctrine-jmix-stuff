@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Data\DataStore;
+namespace TPG\PMix\Data\DataStore;
 
-use Misterx\DoctrineJmix\Data\SaveContext;
+use TPG\PMix\Data\SaveContext;
 
 final readonly class EntityDeletingEvent implements DataStoreEvent
 {

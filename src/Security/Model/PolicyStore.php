@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Security\Model;
+namespace TPG\PMix\Security\Model;
 
-use Misterx\DoctrineJmix\MetaModel\MetaClass;
+use TPG\PMix\MetaModel\MetaClass;
 
 interface PolicyStore
 {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Tests\Entity\SameEntityAssociation;
+namespace TPG\PMix\Tests\Entity\SameEntityAssociation;
 
 use Doctrine\ORM\Mapping as ORM;
 

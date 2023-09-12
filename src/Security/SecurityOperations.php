@@ -1,9 +1,9 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Security;
+namespace TPG\PMix\Security;
 
-use Misterx\DoctrineJmix\MetaModel\MetaClass;
-use Misterx\DoctrineJmix\Security\Model\PolicyStore;
+use TPG\PMix\MetaModel\MetaClass;
+use TPG\PMix\Security\Model\PolicyStore;
 
 interface SecurityOperations
 {

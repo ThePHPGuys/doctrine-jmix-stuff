@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix;
+namespace TPG\PMix;
 
-use Misterx\DoctrineJmix\Data\View;
-use Misterx\DoctrineJmix\MetaModel\MetaClass;
+use TPG\PMix\Data\View;
+use TPG\PMix\MetaModel\MetaClass;
 
 interface ViewsRepository
 {

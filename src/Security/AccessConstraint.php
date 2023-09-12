@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix\Security;
+namespace TPG\PMix\Security;
 
 interface AccessConstraint
 {

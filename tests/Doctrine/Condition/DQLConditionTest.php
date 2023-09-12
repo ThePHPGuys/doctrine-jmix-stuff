@@ -1,8 +1,8 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine\Condition;
+namespace TPG\PMix\Tests\Doctrine\Condition;
 
-use Misterx\DoctrineJmix\Doctrine\Condition\DQLCondition;
+use TPG\PMix\Doctrine\Condition\DQLCondition;
 use PHPUnit\Framework\TestCase;
 
 class DQLConditionTest extends TestCase

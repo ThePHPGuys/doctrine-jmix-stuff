@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Misterx\DoctrineJmix;
+namespace TPG\PMix;
 
-use Misterx\DoctrineJmix\Data\View;
-use Misterx\DoctrineJmix\Data\ViewProperty;
-use Misterx\DoctrineJmix\MetaModel\MetaClass;
-use Misterx\DoctrineJmix\MetaModel\MetaData;
+use TPG\PMix\Data\View;
+use TPG\PMix\Data\ViewProperty;
+use TPG\PMix\MetaModel\MetaClass;
+use TPG\PMix\MetaModel\MetaData;
 
 final class ViewBuilder
 {

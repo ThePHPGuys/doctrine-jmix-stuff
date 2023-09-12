@@ -1,8 +1,8 @@
 <?php
 
-namespace Misterx\DoctrineJmix\MetaModel\Datatype;
+namespace TPG\PMix\MetaModel\Datatype;
 
-use Misterx\DoctrineJmix\MetaModel\Datatype;
+use TPG\PMix\MetaModel\Datatype;
 
 final class Enumeration implements Datatype
 {

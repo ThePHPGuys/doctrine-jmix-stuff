@@ -1,8 +1,8 @@
 <?php
 
-namespace Misterx\DoctrineJmix\Tests\Doctrine\FetchPlan;
+namespace TPG\PMix\Tests\Doctrine\FetchPlan;
 
-use Misterx\DoctrineJmix\Declined\Data\FetchPlan\DefaultDataMapper;
+use TPG\PMix\Declined\Data\FetchPlan\DefaultDataMapper;
 use PHPUnit\Framework\TestCase;
 
 class DefaultDataMapperTest extends TestCase
