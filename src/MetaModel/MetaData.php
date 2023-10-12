@@ -46,4 +46,9 @@ final class MetaData
     {
         return array_values($this->byClass);
     }
+
+    public function create(string $className): object
+    {
+        return new $className;
+    }
 }

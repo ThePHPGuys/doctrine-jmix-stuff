@@ -120,7 +120,11 @@ final class ViewBuilder
         $viewProperties = [];
         foreach ($this->properties as $property => $propertyView) {
             if (isset($this->builders[$property])) {
-                $viewProperties[] = new ViewProperty($property, $this->builders[$property]->build());
+                $nestedView = $this->builders[$property]->build();
+                if (count($nestedView->getProperties()) === 0) {
+                    $nestedView = null;
+                }
+                $viewProperties[] = new ViewProperty($property, $nestedView);
             } else {
                 $viewProperties[] = new ViewProperty($property, $propertyView);
             }

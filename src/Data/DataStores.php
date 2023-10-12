@@ -3,14 +3,19 @@ declare(strict_types=1);
 
 namespace TPG\PMix\Data;
 
-final readonly class DataStores
+readonly class DataStores
 {
     /**
-     * @param array<string,DataStore> $stores
+     * @var array<string,DataStore>
      */
-    public function __construct(private array $stores)
-    {
+    private array $stores;
 
+    /**
+     * @param iterable<string,DataStore> $stores
+     */
+    public function __construct(iterable $stores)
+    {
+        $this->stores = $stores instanceof \Traversable ? iterator_to_array($stores) : $stores;
     }
 
     public function get(string $storeName): DataStore

@@ -5,6 +5,11 @@ namespace TPG\PMix\Security;
 
 final class AccessManager
 {
+    public function __construct(private ?AccessConstraintsRegistry $registry = null)
+    {
+
+    }
+
     /**
      * @param AccessConstraint[] $constraints
      */
@@ -17,6 +22,14 @@ final class AccessManager
             $constraint->apply($context);
             $this->log($constraint, $context);
         }
+    }
+
+    public function applyRegisteredConstraints(AccessContext $context): void
+    {
+        if (!$this->registry) {
+            return;
+        }
+        $this->applyConstraints($context, $this->registry->getConstraints());
     }
 
     private function log(AccessConstraint $constraint, AccessContext $context): void

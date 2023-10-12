@@ -24,7 +24,7 @@ readonly class DefaultViewsRepository implements ViewsRepository
     {
         $view = $this->findMetaClassView($metaClass, $name);
         if (!$view) {
-            throw new \RuntimeException(sprintf('Unable to find view "%s" for entity "%s', $name, $metaClass->getName()));
+            throw new \RuntimeException(sprintf('Unable to find view "%s" for entity "%s"', $name, $metaClass->getName()));
         }
         return $view;
     }

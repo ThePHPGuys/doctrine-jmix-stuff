@@ -12,10 +12,10 @@ use TPG\PMix\MetaModel\MetaClass;
 use TPG\PMix\MetaModel\MetaData;
 use TPG\PMix\Security\AccessConstraint;
 
-final class UnconstrainedDataManagerImpl implements UnconstrainedDataManager
+readonly class UnconstrainedDataManagerImpl implements UnconstrainedDataManager
 {
 
-    public function __construct(private readonly DataStores $dataStores, private readonly MetaData $metaData)
+    public function __construct(private DataStores $dataStores, private MetaData $metaData)
     {
 
     }
