@@ -12,6 +12,7 @@ use TPG\PMix\MetaDataTools;
 use TPG\PMix\MetaModel\Attribute\Attribute;
 use TPG\PMix\MetaModel\Attribute\Composition;
 use TPG\PMix\MetaModel\Attribute\Property;
+use TPG\PMix\MetaModel\CascadeType;
 use TPG\PMix\MetaModel\Datatype;
 use TPG\PMix\MetaModel\MetaClass;
 use TPG\PMix\MetaModel\MetaData;
@@ -244,6 +245,38 @@ final class DoctrineMetaDataLoader
             $property->getAttributes()->set(MetaDataTools::PRIMARY_KEY_ATTR, true);
             $property->getMetaClass()->getAttributes()->set(MetaDataTools::PRIMARY_KEY_ATTR, $property->getName());
         }
+
+        if ($classMetadata->hasAssociation($property->getName())) {
+            $cascadeTypes = $this->getCascadeTypes($classMetadata->getAssociationMapping($property->getName()));
+            if ($cascadeTypes) {
+                $property->getAttributes()->set(MetaDataTools::CASCADE_TYPES_ATTR, array_map(fn(CascadeType $type) => $type->value, $cascadeTypes));
+                $this->registerPropertyInMetaClassAs($property, MetaDataTools::CASCADE_PROPERTIES_ATTR);
+            }
+        }
+    }
+
+    /**
+     * @return CascadeType[]
+     */
+    private function getCascadeTypes(array $associationMapping): array
+    {
+        $types = [];
+        if ($associationMapping['isCascadeRemove'] === true) {
+            $types[] = CascadeType::REMOVE;
+        }
+        if ($associationMapping['isCascadePersist'] === true) {
+            $types[] = CascadeType::PERSIST;
+        }
+        if ($associationMapping['isCascadeRefresh'] === true) {
+            $types[] = CascadeType::REFRESH;
+        }
+        if ($associationMapping['isCascadeMerge'] === true) {
+            $types[] = CascadeType::MERGE;
+        }
+        if ($associationMapping['isCascadeDetach'] === true) {
+            $types[] = CascadeType::DETACH;
+        }
+        return $types;
     }
 
     private function onPropertyCreated(MetaProperty $property, \ReflectionMethod|\ReflectionProperty $reflection): void
@@ -251,16 +284,18 @@ final class DoctrineMetaDataLoader
         $this->loadPropertyAttributes($property, $reflection);
         $this->resolveReadonly($property, $reflection);
 
-        $classAttributes = $property->getMetaClass()->getAttributes();
         if ($this->isSystem($property)) {
-            $property->getAttributes()->set(MetaDataTools::SYSTEM_FIELD_ATTR, true);
-            if (!$classAttributes->has(MetaDataTools::SYSTEM_FIELD_ATTR)) {
-                $classAttributes->set(MetaDataTools::SYSTEM_FIELD_ATTR, [$property->getName()]);
-            } else {
-                $prevSystem = $classAttributes->get(MetaDataTools::SYSTEM_FIELD_ATTR);
-                $classAttributes->set(MetaDataTools::SYSTEM_FIELD_ATTR, [...$prevSystem, $property->getName()]);
-            }
+            $property->getAttributes()->set(MetaDataTools::SYSTEM_ATTR, true);
+            $this->registerPropertyInMetaClassAs($property, MetaDataTools::SYSTEM_ATTR);
         }
+    }
+
+    private function registerPropertyInMetaClassAs(MetaProperty $property, string $tag): void
+    {
+        $classAttributes = $property->getMetaClass()->getAttributes();
+        $properties = $classAttributes->has($tag) ? $classAttributes->get($tag) : [];
+        $properties[] = $property->getName();
+        $classAttributes->set($tag, $properties);
     }
 
     private function resolveReadonly(MetaProperty $property, \ReflectionMethod|\ReflectionProperty $reflection)
